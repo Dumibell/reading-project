@@ -4,4 +4,41 @@
 
 body {
   box-sizing: border-box;
+  /* background-color: #f9f4e8; */
 }
+
+@import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+
+.nanummyeongjo * {
+  font-family: "Nanum Myeongjo", serif;
+}
+
+/* @media (max-width: 1000px) {
+  .cardContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+} */
+
+/* @media (max-width: 1300px) {
+  .small-main {
+    margin-top: 240px;
+    margin-left: -180px;
+  }
+}
+
+@media (max-width: 400px) {
+  .small-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1px;
+  }
+  .main-title-text {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+  .main-text {
+    margin-top: 1px;
+  }
+} */

@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        nanum: ["Nanum Myeongjo", "sans-serif"],
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
+  backgroundImage: {
+    mainImage: "url('/images/original.avif')",
+  },
 };
