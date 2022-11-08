@@ -45,9 +45,14 @@ export const Login = ({ setLoginModal }) => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-[#404656] p-5 rounded-md">
-      <img src="/images/book.png" className="w-24 h-24" alt="책 아이콘" />
-      <form onSubmit={SignIn} className="flex flex-col">
+    <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-md">
+      <img
+        src="/images/login-book.jpg"
+        className="w-48 h-32 mt-16"
+        alt="책 아이콘"
+      />
+      {/* <div className="text-3xl mt-5 font-bold  text-[#43423C]">Log In</div> */}
+      <form onSubmit={SignIn} className="flex flex-col w-[80%]">
         <input
           type="email"
           name="email"
@@ -55,7 +60,7 @@ export const Login = ({ setLoginModal }) => {
           required
           value={email}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2"
+          className="my-1 h-10 outline-none border-b border-[#61342F] px-2"
         />
         <input
           type="password"
@@ -64,30 +69,28 @@ export const Login = ({ setLoginModal }) => {
           required
           value={password}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2"
+          className="my-1 h-10 outline-none border-b  border-[#61342F] px-2"
         />
         <input
           type="submit"
           value="Log In"
-          className="bg-white mt-2 rounded-md h-8  shadow-sm hover:cursor-pointer"
+          className="mt-2 rounded-md h-8 bg-[#61342F] text-white hover:cursor-pointer"
         />
-      </form>
-      <div className="mt-3 font-bold w-60 flex justify-center rounded-md">
         <button
           onClick={onSocialClick}
           name="google"
-          className="p-2 rounded-md text-white"
+          className="mt-2 rounded-md h-8 bg-[#61342F] text-white hover:cursor-pointer "
         >
-          구글로 로그인하기 <FontAwesomeIcon icon={faGoogle} />
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-      </div>
-      {/* <div
-        className="text-white border-b text-sm"
+      </form>
+      <div
+        className="border-b border-[#61342F] text-[#61342F] text-sm mt-16 hover:cursor-pointer"
         onClick={() => setSignUpModal(true)}
       >
         Create an Account
       </div>
-      {signUpModal ? <SignUp setLoginModal={setLoginModal} /> : <></>} */}
+      {signUpModal ? <SignUp setLoginModal={setLoginModal} /> : <></>}
     </div>
   );
 };

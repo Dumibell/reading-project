@@ -2,15 +2,16 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
-import { dbService } from "../firebase";
+import { dbService, storageService } from "../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
+import { v4 as uuidv4 } from "uuid";
 
-export const Writing = ({ userObj }) => {
+export const Writing = ({ userObj, attachment, setAttachment }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const [fileName, setFileName] = useState("");
 
   const date = new Date();
 
@@ -33,13 +34,44 @@ export const Writing = ({ userObj }) => {
     }
   };
 
+  const onFileChange = (e) => {
+    const {
+      target: { value, files },
+    } = e;
+    setFileName(value);
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
+    };
+    if (Boolean(theFile)) {
+      reader.readAsDataURL(theFile);
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (title === "") {
       alert("책 제목을 입력해주세요");
     } else if (text === "") {
       alert("내용을 입력해주세요");
+    } else if (!fileName) {
+      alert("사진을 첨부해주세요");
     } else if (window.confirm("작성글을 게시하시겠습니까?")) {
+      let attachmentURL = "";
+      if (attachment !== "") {
+        const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+        const response = await uploadString(
+          attachmentRef,
+          attachment,
+          "data_url"
+        );
+        attachmentURL = await getDownloadURL(response.ref);
+      }
+
       await addDoc(collection(userRef, `${userObj.uid}`), {
         title: title,
         text: text,
@@ -51,6 +83,8 @@ export const Writing = ({ userObj }) => {
         whoLikesIt: [],
         month: `${date.getFullYear()}.${date.getMonth() + 1}`,
         uid: userObj.uid,
+        attachmentURL,
+        name: userObj.displayName,
       });
       await addDoc(collection(dbService, "writings"), {
         title: title,
@@ -63,6 +97,8 @@ export const Writing = ({ userObj }) => {
         whoLikesIt: [],
         month: `${date.getFullYear()}.${date.getMonth() + 1}`,
         uid: userObj.uid,
+        attachmentURL,
+        name: userObj.displayName,
       });
       navigate("/");
     }
@@ -101,11 +137,13 @@ export const Writing = ({ userObj }) => {
               사진 첨부
             </label>
             <input
+              id="photoFile"
               type="file"
               accept="image/*"
-              id="photoFile"
-              className="opacity-0"
+              className="w-0 h-0"
+              onChange={onFileChange}
             />
+            <span className="ml-2 text-xs">{fileName}</span>
           </div>
           <div className="flex justify-end mt-3">
             <span

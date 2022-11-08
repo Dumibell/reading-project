@@ -21,6 +21,7 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [search, setSearch] = useState("");
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -61,7 +62,14 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
         <Route
           exact
           path="/writing"
-          element={<Writing userObj={userObj} isLoggedIn={Boolean(userObj)} />}
+          element={
+            <Writing
+              userObj={userObj}
+              isLoggedIn={Boolean(userObj)}
+              attachment={attachment}
+              setAttachment={setAttachment}
+            />
+          }
         />
         <Route
           path="/searchbox"

@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
-export const Card = ({ item, userObj, search }) => {
+export const Card = ({ item, userObj, search, isLoggedIn }) => {
   const itemRef = doc(dbService, "writings", `${item.id}`);
   const navigate = useNavigate();
 
@@ -44,9 +44,9 @@ export const Card = ({ item, userObj, search }) => {
   const showSearchList = () => {
     if (item.title.includes(search) || search === "") {
       return (
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
-            <div className="w-[700px] flex flex-col justify-between">
+            <div className="w-full flex flex-col justify-between">
               <div
                 onClick={() => navigate(`/detailpage/${item.id}`)}
                 className="hover:cursor-pointer"
@@ -59,15 +59,25 @@ export const Card = ({ item, userObj, search }) => {
               <div className="flex justify-between mt-2 text-sm">
                 <div className="italic opacity-80">
                   <span>{item.createdDate}</span>
-                  <span className="ml-3">by {userObj.displayName}</span>
+                  <span className="ml-3">by {item.name}</span>
                 </div>
                 <div className="mr-3">
-                  {item.whoLikesIt.includes(userObj.uid) ? (
-                    <FontAwesomeIcon
-                      icon={solidHeart}
-                      onClick={clickLikeButton}
-                      className="text-[red] hover:cursor-pointer"
-                    />
+                  {isLoggedIn ? (
+                    <>
+                      {item.whoLikesIt.includes(userObj.uid) ? (
+                        <FontAwesomeIcon
+                          icon={solidHeart}
+                          onClick={clickLikeButton}
+                          className="text-[red] hover:cursor-pointer"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={regularHeart}
+                          onClick={clickLikeButton}
+                          className="hover:cursor-pointer"
+                        />
+                      )}{" "}
+                    </>
                   ) : (
                     <FontAwesomeIcon
                       icon={regularHeart}
@@ -79,7 +89,11 @@ export const Card = ({ item, userObj, search }) => {
                 </div>
               </div>
             </div>
-            <div className="w-40 h-40 border">img</div>
+            <img
+              src={item.attachmentURL}
+              alt="사진"
+              className="w-[200px] h-[163px] object-cover ml-8"
+            />
           </div>
         </div>
       );

@@ -43,12 +43,11 @@ export const Home = ({
         setLoginModal={setLoginModal}
         userObj={userObj}
       />
-
       <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA]">
         <div className="mr-[-220px] mt-60 z-10 small-main">
           <div className="flex flex-col italic text-3xl">
-            <p className="main-title-text">WE ARE BUILDING</p>
-            <p className="main-title-text">YOUR READING HABIT</p>
+            <p className="main-title-text">We Are Building</p>
+            <p className="main-title-text">Your Reading Habit</p>
           </div>
           <div className="mt-2 text-xs text main-text">
             <p>매일 책 읽는 습관을 기르기 위한 프로젝트입니다.</p>
@@ -91,6 +90,7 @@ export const Home = ({
                   key={item.id}
                   userObj={userObj}
                   search={search}
+                  isLoggedIn={isLoggedIn}
                 />
               );
             })
@@ -107,7 +107,7 @@ export const Home = ({
       </div>
 
       {loginModal ? (
-        <div className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+        <div className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] z-10">
           <Login setLoginModal={setLoginModal} />
         </div>
       ) : (
