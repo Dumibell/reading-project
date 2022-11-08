@@ -14,11 +14,13 @@ import { Login } from "./Components/Login";
 import { MyPage } from "./Components/MyPage";
 import { Writing } from "./Components/Writing";
 import { SearchBox } from "./Components/SearchBox";
+import { DetailPage } from "./Components/DetailPage";
 import { authService, dbService } from "./firebase";
 
 export const AppRouter = ({ recentWritings, likedWritings }) => {
   const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -46,6 +48,8 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
               isLoggedIn={Boolean(userObj)}
               recentWritings={recentWritings}
               likedWritings={likedWritings}
+              search={search}
+              setSearch={setSearch}
             />
           }
         />
@@ -62,7 +66,19 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
         <Route
           path="/searchbox"
           element={
-            <SearchBox userObj={userObj} isLoggedIn={Boolean(userObj)} />
+            <SearchBox
+              userObj={userObj}
+              isLoggedIn={Boolean(userObj)}
+              recentWritings={recentWritings}
+              search={search}
+              setSearch={setSearch}
+            />
+          }
+        />
+        <Route
+          path="/detailpage/:id"
+          element={
+            <DetailPage recentWritings={recentWritings} userObj={userObj} />
           }
         />
       </Routes>

@@ -8,14 +8,16 @@ import {
   FieldValue,
   arrayRemove,
 } from "firebase/firestore";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { dbService } from "../firebase";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
-export const Card = ({ item, userObj }) => {
+export const Card = ({ item, userObj, search }) => {
   const itemRef = doc(dbService, "writings", `${item.id}`);
+  const navigate = useNavigate();
 
   const plusLike = (event) => {
     updateDoc(itemRef, { like: item.like + 1 });
@@ -39,33 +41,50 @@ export const Card = ({ item, userObj }) => {
     }
   };
 
-  return (
-    <div className="">
-      <div className="flex justify-center">
-        <div className="w-[1000px] border-b pb-3 mt-5 m-4 flex justify-between">
-          <div className="w-[700px]">
-            <div className="text-xl font-bold mb-1">{item.title}</div>
-            <div className="mb-1">{item.text}</div>
-            <div>
-              {item.whoLikesIt.includes(userObj.uid) ? (
-                <FontAwesomeIcon
-                  icon={solidHeart}
-                  onClick={clickLikeButton}
-                  className="text-[red] hover:cursor-pointer"
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={regularHeart}
-                  onClick={clickLikeButton}
-                  className="hover:cursor-pointer"
-                />
-              )}
-              <span className="ml-1">{item.like}</span>
+  const showSearchList = () => {
+    if (item.title.includes(search) || search === "") {
+      return (
+        <div className="flex justify-center">
+          <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
+            <div className="w-[700px] flex flex-col justify-between">
+              <div
+                onClick={() => navigate(`/detailpage/${item.id}`)}
+                className="hover:cursor-pointer"
+              >
+                <div className="text-xl font-bold mb-1">{item.title}</div>
+                <div className="mb-1 h-[70px] overflow-hidden">
+                  {item.text.replace(/\\n/gi, " ")}
+                </div>
+              </div>
+              <div className="flex justify-between mt-2 text-sm">
+                <div className="italic opacity-80">
+                  <span>{item.createdDate}</span>
+                  <span className="ml-3">by {userObj.displayName}</span>
+                </div>
+                <div className="mr-3">
+                  {item.whoLikesIt.includes(userObj.uid) ? (
+                    <FontAwesomeIcon
+                      icon={solidHeart}
+                      onClick={clickLikeButton}
+                      className="text-[red] hover:cursor-pointer"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={regularHeart}
+                      onClick={clickLikeButton}
+                      className="hover:cursor-pointer"
+                    />
+                  )}
+                  <span className="ml-1">{item.like}</span>
+                </div>
+              </div>
             </div>
+            <div className="w-40 h-40 border">img</div>
           </div>
-          <div className="w-40 h-40 border">img</div>
         </div>
-      </div>
-    </div>
-  );
+      );
+    }
+  };
+
+  return <div>{showSearchList()}</div>;
 };

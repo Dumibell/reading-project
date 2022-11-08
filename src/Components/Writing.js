@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { dbService } from "../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +10,9 @@ export const Writing = ({ userObj }) => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const [attachment, setAttachment] = useState("");
+
+  const date = new Date();
 
   const cancelWriting = () => {
     if (window.confirm("글 작성을 취소하시겠습니까?")) {
@@ -18,14 +22,14 @@ export const Writing = ({ userObj }) => {
 
   const userRef = doc(dbService, "writings", "users");
 
-  const onChange = (event) => {
+  const onChange = async (event) => {
     const {
       target: { name, value },
     } = event;
     if (name === "title") {
       setTitle(value);
     } else if (name === "text") {
-      setText(value);
+      setText(value.replace(/\n/gi, "\\n")); //줄바꿈시 \n이 추가되어 db에 저장되도록
     }
   };
 
@@ -40,27 +44,33 @@ export const Writing = ({ userObj }) => {
         title: title,
         text: text,
         createdAt: Date.now(),
+        createdDate: `${date.getFullYear()}.${
+          date.getMonth() + 1
+        }.${date.getDate()}`,
         like: 0,
         whoLikesIt: [],
-        month: date.getMonth(),
+        month: `${date.getFullYear()}.${date.getMonth() + 1}`,
+        uid: userObj.uid,
       });
       await addDoc(collection(dbService, "writings"), {
         title: title,
         text: text,
         createdAt: Date.now(),
+        createdDate: `${date.getFullYear()}.${
+          date.getMonth() + 1
+        }.${date.getDate()}`,
         like: 0,
         whoLikesIt: [],
-        month: date.getMonth(),
+        month: `${date.getFullYear()}.${date.getMonth() + 1}`,
+        uid: userObj.uid,
       });
       navigate("/");
     }
   };
 
-  const date = new Date();
-
   return (
     <div className="w-full h-screen flex justify-center items-center bg-[#FBF7EE]">
-      <div className="w-1/2 h-4/5 m-10 flex flex-col">
+      <div className="w-[60%] h-4/5 m-10 flex flex-col">
         <div className="flex flex-col h-full justify-between">
           <div className="flex flex-col flex-1">
             <div className="text-3xl border-b mb-5 pb-2">
@@ -78,14 +88,24 @@ export const Writing = ({ userObj }) => {
                 name="text"
                 placeholder="읽고 느낀 점을 자유롭게 작성해주세요"
                 required
+                spellCheck="false"
                 onChange={onChange}
                 className="bg-transparent outline-none w-full flex-1 px-2
                 resize-none scrollbar-hide"
               />
             </div>
           </div>
-          <div className="text-[#9CA3AF] hover:cursor-pointer py-3 border-b text-sm">
-            <FontAwesomeIcon icon={faPhotoFilm} /> 사진 첨부
+          <div className="text-[#9CA3AF] py-3 border-b text-sm">
+            <label for="photoFile" className="hover:cursor-pointer">
+              <FontAwesomeIcon icon={faPhotoFilm} />
+              사진 첨부
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              id="photoFile"
+              className="opacity-0"
+            />
           </div>
           <div className="flex justify-end mt-3">
             <span

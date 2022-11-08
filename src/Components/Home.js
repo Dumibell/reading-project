@@ -19,6 +19,8 @@ export const Home = ({
   recentWritings,
   likedWritings,
   userObj,
+  search,
+  setSearch,
 }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [filter, setFilter] = useState("recent");
@@ -43,7 +45,7 @@ export const Home = ({
       />
 
       <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA]">
-        <div className="mr-[-220px] mt-60 z-10 small-main ">
+        <div className="mr-[-220px] mt-60 z-10 small-main">
           <div className="flex flex-col italic text-3xl">
             <p className="main-title-text">WE ARE BUILDING</p>
             <p className="main-title-text">YOUR READING HABIT</p>
@@ -64,10 +66,8 @@ export const Home = ({
           </div>
         </div>
         <img src="/images/original.avif" alt="bg" className="w-[1000px]" />
-
-        <div className="bg-mainImage"></div>
       </div>
-      <div className="flex justify-end mt-20 mr-20">
+      <div className="flex justify-end mt-20 mr-20 text-sm">
         <div
           className="mr-2 hover:cursor-pointer hover:font-semibold"
           onClick={() => setFilter("recent")}
@@ -82,13 +82,27 @@ export const Home = ({
           인기순
         </div>
       </div>
-      <div className="w-full px-2 justify-center mt-3 cardContainer">
+      <div className="w-full px-2 justify-center cardContainer">
         {filter === "recent"
           ? recentWritings.map((item) => {
-              return <Card item={item} key={item.id} userObj={userObj} />;
+              return (
+                <Card
+                  item={item}
+                  key={item.id}
+                  userObj={userObj}
+                  search={search}
+                />
+              );
             })
           : likedWritings.map((item) => {
-              return <Card item={item} key={item.id} userObj={userObj} />;
+              return (
+                <Card
+                  item={item}
+                  key={item.id}
+                  userObj={userObj}
+                  search={search}
+                />
+              );
             })}
       </div>
 

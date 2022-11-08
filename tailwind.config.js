@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       fontFamily: {
         nanum: ["Nanum Myeongjo", "sans-serif"],
+        pretendard: ["Pretendard-Regular", "sans-serif"],
+        referi: ["LeferiPoint-WhiteObliqueA", "sans-serif"],
+        nanumsq: ["Nanum Square", "sans-serif"],
       },
     },
   },

@@ -4,13 +4,29 @@
 
 body {
   box-sizing: border-box;
-  /* background-color: #f9f4e8; */
 }
 
 @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+@import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
 
 .nanummyeongjo * {
   font-family: "Nanum Myeongjo", serif;
+}
+
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LeferiPoint-WhiteObliqueA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteObliqueA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* @media (max-width: 1000px) {
