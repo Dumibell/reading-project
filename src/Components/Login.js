@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import { SignUp } from "./SignUp";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export const Login = ({ setLoginModal }) => {
   const [email, setEmail] = useState("");
@@ -46,12 +47,18 @@ export const Login = ({ setLoginModal }) => {
 
   return (
     <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-md">
+      <FontAwesomeIcon
+        icon={faXmark}
+        className="ml-[340px] text-[#61342F] hover:cursor-pointer"
+        onClick={() => {
+          setLoginModal(false);
+        }}
+      />
       <img
         src="/images/login-book.jpg"
         className="w-48 h-32 mt-16"
         alt="책 아이콘"
       />
-      {/* <div className="text-3xl mt-5 font-bold  text-[#43423C]">Log In</div> */}
       <form onSubmit={SignIn} className="flex flex-col w-[80%]">
         <input
           type="email"
