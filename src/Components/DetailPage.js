@@ -14,7 +14,7 @@ import { async } from "@firebase/util";
 import { Navigation } from "./Navigation";
 import { deleteObject, ref } from "firebase/storage";
 
-export const DetailPage = ({ userObj }) => {
+export const DetailPage = ({ userObj, isLoggedIn }) => {
   const [cardDetail, setCardDetail] = useState();
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState();
@@ -65,7 +65,7 @@ export const DetailPage = ({ userObj }) => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-full flex justify-center items-center overflow-visible">
       <div className="w-1/2 h-4/5 m-10 flex flex-col">
         {cardDetail ? (
           <>
@@ -84,44 +84,55 @@ export const DetailPage = ({ userObj }) => {
                 <div className="text-3xl mb-5 pb-2">{cardDetail.title}</div>
               )}
 
-              {userObj.uid === cardDetail.uid ? (
-                <div className="mt-4 w-[100px]">
-                  <span
-                    className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
-                    onClick={edit}
-                  >
-                    수정
-                  </span>
-                  <span
-                    className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
-                    onClick={deleteCard}
-                  >
-                    삭제
-                  </span>
-                </div>
+              {isLoggedIn ? (
+                <>
+                  {userObj.uid === cardDetail.uid ? (
+                    <div className="mt-4 w-[100px] flex justify-end">
+                      <span
+                        className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
+                        onClick={edit}
+                      >
+                        수정
+                      </span>
+                      <span
+                        className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
+                        onClick={deleteCard}
+                      >
+                        삭제
+                      </span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </>
               ) : (
                 <></>
               )}
             </div>
 
-            <img
-              src={cardDetail.attachmentURL}
-              className="max-w-1/2 max-h-[500px] object-cover"
-              alt="이미지"
-            />
             {editing ? (
-              <div className="flex flex-col justify-between flex-1 mt-3">
+              <div className="flex flex-col flex-1 my-3">
+                <img
+                  src={cardDetail.attachmentURL}
+                  className="w-1/4  object-cover"
+                  alt="이미지"
+                />
                 <textarea
                   name="text"
                   value={newText}
                   spellCheck="false"
                   onChange={onChange}
-                  className="bg-transparent outline-none w-full flex-1 px-2
-                 resize-none scrollbar-hide"
+                  className="bg-transparent outline-none w-full h-96
+                 scrollbar-hide"
                 />
               </div>
             ) : (
-              <div className="whitespace-pre-line mt-3">
+              <div className="whitespace-pre-line mt-3 pb-16">
+                <img
+                  src={cardDetail.attachmentURL}
+                  className="max-w-1/2  object-cover"
+                  alt="이미지"
+                />
                 {cardDetail.text.replace(/\\n/gi, "\n")}
               </div>
             )}

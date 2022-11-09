@@ -46,7 +46,7 @@ export const Login = ({ setLoginModal }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-md">
+    <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-lg">
       <FontAwesomeIcon
         icon={faXmark}
         className="ml-[340px] text-[#61342F] hover:cursor-pointer"

@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
-export const Card = ({ item, userObj, search, isLoggedIn }) => {
+export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
   const itemRef = doc(dbService, "writings", `${item.id}`);
   const navigate = useNavigate();
 
@@ -38,13 +38,14 @@ export const Card = ({ item, userObj, search, isLoggedIn }) => {
       }
     } else {
       alert("로그인이 필요한 서비스입니다.");
+      setLoginModal(true);
     }
   };
 
   const showSearchList = () => {
     if (item.title.includes(search) || search === "") {
       return (
-        <div className="flex justify-center ">
+        <div className="flex justify-center">
           <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
             <div className="w-full flex flex-col justify-between">
               <div
@@ -92,7 +93,7 @@ export const Card = ({ item, userObj, search, isLoggedIn }) => {
             <img
               src={item.attachmentURL}
               alt="사진"
-              className="w-[200px] h-[163px] object-cover ml-8"
+              className="w-[200px] h-[200px] object-cover"
             />
           </div>
         </div>

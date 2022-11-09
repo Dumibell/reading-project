@@ -91,6 +91,7 @@ export const Home = ({
                   userObj={userObj}
                   search={search}
                   isLoggedIn={isLoggedIn}
+                  setLoginModal={setLoginModal}
                 />
               );
             })
@@ -101,6 +102,8 @@ export const Home = ({
                   key={item.id}
                   userObj={userObj}
                   search={search}
+                  isLoggedIn={isLoggedIn}
+                  setLoginModal={setLoginModal}
                 />
               );
             })}
