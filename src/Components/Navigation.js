@@ -18,7 +18,7 @@ export const Navigation = ({ isLoggedIn, setLoginModal }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full font-referi">
       <div className="flex justify-end items-end h-20 mr-10 mb-3">
         <div
           className="mr-8 hover:cursor-pointer hover:translate-y-[-2px]"
@@ -38,7 +38,7 @@ export const Navigation = ({ isLoggedIn, setLoginModal }) => {
             onClick={() => setLoginModal(true)}
             className="hover:cursor-pointer hover:translate-y-[-2px]"
           >
-            login
+            Login
           </div>
         )}
         <div>

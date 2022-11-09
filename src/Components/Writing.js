@@ -72,20 +72,20 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
         attachmentURL = await getDownloadURL(response.ref);
       }
 
-      await addDoc(collection(userRef, `${userObj.uid}`), {
-        title: title,
-        text: text,
-        createdAt: Date.now(),
-        createdDate: `${date.getFullYear()}.${
-          date.getMonth() + 1
-        }.${date.getDate()}`,
-        like: 0,
-        whoLikesIt: [],
-        month: `${date.getFullYear()}.${date.getMonth() + 1}`,
-        uid: userObj.uid,
-        attachmentURL,
-        name: userObj.displayName,
-      });
+      // await addDoc(collection(userRef, `${userObj.uid}`), {
+      //   title: title,
+      //   text: text,
+      //   createdAt: Date.now(),
+      //   createdDate: `${date.getFullYear()}.${
+      //     date.getMonth() + 1
+      //   }.${date.getDate()}`,
+      //   like: 0,
+      //   whoLikesIt: [],
+      //   month: `${date.getFullYear()}.${date.getMonth() + 1}`,
+      //   uid: userObj.uid,
+      //   attachmentURL,
+      //   name: userObj.displayName,
+      // });
       await addDoc(collection(dbService, "writings"), {
         title: title,
         text: text,

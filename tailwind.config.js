@@ -11,6 +11,8 @@ module.exports = {
         inkLip: ["InkLipquid", "sans-serif"],
         kyobo: ["KyoboHandwriting2020A", "sans-serif"],
         ridi: ["RIDIBatang", "sans-serif"],
+        gothic: ["GothicA1-Light", "sans-serif"],
+        ibm: ["IBMPlexSansKR-Regular", "sans-serif"],
       },
     },
   },

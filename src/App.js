@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <div className="font-referi">
+    <div className="font-gothic">
       {recentWritings ? (
         <AppRouter
           recentWritings={recentWritings}

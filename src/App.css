@@ -54,6 +54,36 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "GothicA1-Light";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2")
+    format("woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBMPlexSansKR-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media (max-width: 1150px) {
+  .small-main {
+    margin-right: -500px;
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 800px) {
+  .small-main {
+    margin-right: -900px;
+    padding-left: 50px;
+  }
+}
+
 /* @media (max-width: 1000px) {
   .cardContainer {
     padding-left: 25px;

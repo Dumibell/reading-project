@@ -1,11 +1,11 @@
 import { Navigation } from "./Navigation";
-import { useNavigate } from "react-router-dom";
-import { signOut, getAuth } from "firebase/auth";
+
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "../firebase";
 import { Card } from "./Card";
 import { isReactNative } from "@firebase/util";
+import { Profile } from "./Profile";
 
 export const MyPage = ({
   isLoggedIn,
@@ -16,12 +16,6 @@ export const MyPage = ({
 }) => {
   const [myWritings, setMyWritings] = useState([]);
   const [clickState, setClickState] = useState("프로필");
-
-  const navigate = useNavigate();
-  const onLogOutClick = () => {
-    signOut(getAuth());
-    navigate("/");
-  };
 
   // useEffect(() => {
   //   const q = query(
@@ -41,19 +35,7 @@ export const MyPage = ({
 
   const showMyPage = () => {
     if (clickState === "프로필") {
-      return (
-        <div className="mt-3">
-          <div className="flex items-end">
-            <div> {userObj.displayName}님의 프로필</div>
-            <div className="ml-3 text-xs font-bold text-[#8D6D48] hover:cursor-pointer">
-              이름 수정하기
-            </div>
-          </div>
-          <div onClick={onLogOutClick} className="mt-10 hover:cursor-pointer">
-            로그아웃
-          </div>
-        </div>
-      );
+      return <Profile userObj={userObj} recentWritings={recentWritings} />;
     } else if (clickState === "작성한 글") {
       return recentWritings.map((item) => {
         if (item.uid === userObj.uid)

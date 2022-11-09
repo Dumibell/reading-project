@@ -122,18 +122,23 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
                   value={newText}
                   spellCheck="false"
                   onChange={onChange}
-                  className="bg-transparent outline-none w-full h-96
+                  className="bg-transparent outline-none w-full h-screen
                  scrollbar-hide"
                 />
               </div>
             ) : (
-              <div className="whitespace-pre-line mt-3 pb-16">
+              <div className="mt-3 pb-16">
                 <img
                   src={cardDetail.attachmentURL}
-                  className="max-w-1/2  object-cover"
+                  className="w-full  object-cover"
                   alt="이미지"
                 />
-                {cardDetail.text.replace(/\\n/gi, "\n")}
+                <div className="mt-1 text-sm flex justify-end  opacity-60">
+                  {cardDetail.createdDate} by {cardDetail.name}
+                </div>
+                <div className="whitespace-pre-line mt-5">
+                  {cardDetail.text.replace(/\\n/gi, "\n")}
+                </div>
               </div>
             )}
           </>

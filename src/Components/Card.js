@@ -93,7 +93,7 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
             <img
               src={item.attachmentURL}
               alt="사진"
-              className="w-[200px] h-[200px] object-cover"
+              className="min-w-[160px] min-h-[160px] w-[160px] h-[160px] object-cover ml-2"
             />
           </div>
         </div>

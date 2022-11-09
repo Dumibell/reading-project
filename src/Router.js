@@ -54,21 +54,26 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
             />
           }
         />
-        <Route
-          exact
-          path="/mypage"
-          element={
-            <MyPage
-              u
-              userObj={userObj}
-              isLoggedIn={Boolean(userObj)}
-              recentWritings={recentWritings}
-              likedWritings={likedWritings}
-              search={search}
-              setSearch={setSearch}
-            />
-          }
-        />
+        {userObj ? (
+          <Route
+            exact
+            path="/mypage"
+            element={
+              <MyPage
+                u
+                userObj={userObj}
+                isLoggedIn={Boolean(userObj)}
+                recentWritings={recentWritings}
+                likedWritings={likedWritings}
+                search={search}
+                setSearch={setSearch}
+              />
+            }
+          />
+        ) : (
+          <></>
+        )}
+
         <Route
           exact
           path="/writing"

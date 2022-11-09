@@ -43,8 +43,8 @@ export const Home = ({
         setLoginModal={setLoginModal}
         userObj={userObj}
       />
-      <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA]">
-        <div className="mr-[-220px] mt-60 z-10 small-main">
+      <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] font-referi">
+        <div className="mr-[-220px] mt-60 z-10 small-main min-w-[350px]">
           <div className="flex flex-col italic text-3xl">
             <p className="main-title-text">We Are Building</p>
             <p className="main-title-text">Your Reading Habit</p>
@@ -64,7 +64,11 @@ export const Home = ({
             <FontAwesomeIcon icon={faPenNib} className="mr-1" />글 작성하러 가기
           </div>
         </div>
-        <img src="/images/original.avif" alt="bg" className="w-[1000px]" />
+        <img
+          src="/images/original.avif"
+          alt="bg"
+          className="w-[1000px] min-w-[1000px]"
+        />
       </div>
       <div className="flex justify-end mt-20 mr-20 text-sm">
         <div
