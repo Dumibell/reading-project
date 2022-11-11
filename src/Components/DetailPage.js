@@ -66,7 +66,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
 
   return (
     <div className="w-full h-full flex justify-center items-center overflow-visible">
-      <div className="w-1/2 h-4/5 m-10 flex flex-col">
+      <div className="w-1/2 h-4/5 m-10 flex flex-col mt-14">
         {cardDetail ? (
           <>
             <div className="flex justify-between">
@@ -89,13 +89,13 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
                   {userObj.uid === cardDetail.uid ? (
                     <div className="mt-4 w-[100px] flex justify-end">
                       <span
-                        className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
+                        className="border-b border-[#A09C94] text-[#A09C94] h-[16px] mx-1 hover:cursor-pointer text-xs"
                         onClick={edit}
                       >
                         수정
                       </span>
                       <span
-                        className="text-sm text-[#A09C94] mx-1 hover:cursor-pointer"
+                        className="border-b border-[#A09C94] text-[#A09C94] h-[16px] ml-1 hover:cursor-pointer text-xs"
                         onClick={deleteCard}
                       >
                         삭제
@@ -108,6 +108,9 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
               ) : (
                 <></>
               )}
+            </div>
+            <div className="text-sm italic mt-[-5px] ">
+              {cardDetail.createdDate} by {cardDetail.name}
             </div>
 
             {editing ? (
@@ -133,9 +136,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
                   className="w-full  object-cover"
                   alt="이미지"
                 />
-                <div className="mt-1 text-sm flex justify-end  opacity-60">
-                  {cardDetail.createdDate} by {cardDetail.name}
-                </div>
+
                 <div className="whitespace-pre-line mt-5">
                   {cardDetail.text.replace(/\\n/gi, "\n")}
                 </div>

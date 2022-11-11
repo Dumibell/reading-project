@@ -43,7 +43,11 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
   };
 
   const showSearchList = () => {
-    if (item.title.includes(search) || search === "") {
+    if (
+      item.title.includes(search) ||
+      item.text.includes(search) ||
+      search === ""
+    ) {
       return (
         <div className="flex justify-center">
           <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">

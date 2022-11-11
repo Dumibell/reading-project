@@ -4,7 +4,7 @@ import { Login } from "./Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export const Navigation = ({ isLoggedIn, setLoginModal }) => {
+export const Navigation = ({ isLoggedIn, setLoginModal, userObj }) => {
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/");
@@ -31,7 +31,7 @@ export const Navigation = ({ isLoggedIn, setLoginModal }) => {
             onClick={goToMyPage}
             className="hover:cursor-pointer hover:translate-y-[-2px]"
           >
-            마이페이지
+            My Page
           </div>
         ) : (
           <div

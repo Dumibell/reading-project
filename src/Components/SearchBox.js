@@ -29,7 +29,7 @@ export const SearchBox = ({
           />
           <input
             type="text"
-            placeholder="책 제목을 입력해주세요"
+            placeholder="책 제목 / 내용을 검색해주세요"
             className="border-b w-[700px] text-2xl pl-7 p-2 outline-none bg-inherit"
             onChange={onChange}
           />

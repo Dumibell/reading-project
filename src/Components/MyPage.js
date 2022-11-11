@@ -38,7 +38,7 @@ export const MyPage = ({
       return <Profile userObj={userObj} recentWritings={recentWritings} />;
     } else if (clickState === "작성한 글") {
       return recentWritings.map((item) => {
-        if (item.uid === userObj.uid)
+        if (item.uid === userObj.uid) {
           return (
             <Card
               item={item}
@@ -49,6 +49,7 @@ export const MyPage = ({
               setLoginModal={setLoginModal}
             />
           );
+        }
       });
     } else if (clickState === "좋아요 한 글") {
       return recentWritings.map((item) => {

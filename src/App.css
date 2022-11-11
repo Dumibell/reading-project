@@ -7,6 +7,7 @@ body {
   background-color: #fdfbf7;
 }
 
+/* 폰트 */
 @import url(//fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 @import url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css");
 
@@ -70,16 +71,17 @@ body {
   font-style: normal;
 }
 
+/* 메인화면 반응형 */
 @media (max-width: 1150px) {
   .small-main {
-    margin-right: -500px;
+    margin-right: -400px;
     padding-left: 50px;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
   .small-main {
-    margin-right: -900px;
+    margin-right: -950px;
     padding-left: 50px;
   }
 }
