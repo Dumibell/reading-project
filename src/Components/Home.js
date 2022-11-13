@@ -65,7 +65,7 @@ export const Home = ({
           </div>
         </div>
         <img
-          src="/images/original.avif"
+          src={process.env.PUBLIC_URL + "/images/original.avif"}
           alt="bg"
           className="w-[1000px] min-w-[1000px]"
         />

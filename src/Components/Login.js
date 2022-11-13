@@ -55,7 +55,7 @@ export const Login = ({ setLoginModal }) => {
         }}
       />
       <img
-        src="/images/login-book.jpg"
+        src={process.env.PUBLIC_URL + "/images/login-book.jpg"}
         className="w-48 h-32 mt-16"
         alt="책 아이콘"
       />
