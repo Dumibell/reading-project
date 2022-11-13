@@ -64,7 +64,6 @@ export const Login = ({ setLoginModal }) => {
           type="email"
           name="email"
           placeholder="Email"
-          required
           value={email}
           onChange={onChange}
           className="my-1 h-10 outline-none border-b border-[#61342F] px-2 font-gothic"
@@ -73,7 +72,6 @@ export const Login = ({ setLoginModal }) => {
           type="password"
           name="password"
           placeholder="password"
-          required
           value={password}
           onChange={onChange}
           className="my-1 h-10 outline-none border-b  border-[#61342F] px-2 font-gothic"
