@@ -10,7 +10,7 @@ import { useState } from "react";
 import { SignUp } from "./SignUp";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-export const Login = ({ setLoginModal }) => {
+export const Login = ({ setLoginModal, userObj }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpModal, setSignUpModal] = useState(false);
@@ -31,6 +31,7 @@ export const Login = ({ setLoginModal }) => {
     try {
       let data;
       data = await signInWithEmailAndPassword(authService, email, password);
+
       setLoginModal(false);
     } catch (error) {
       console.log(error);
@@ -42,6 +43,7 @@ export const Login = ({ setLoginModal }) => {
     let provider = new GoogleAuthProvider();
     const data = await signInWithPopup(authService, provider);
     setLoginModal(false);
+    alert(`환영합니다 ${userObj.displayName}님!`);
     console.log(data);
   };
 
@@ -59,36 +61,40 @@ export const Login = ({ setLoginModal }) => {
         className="w-48 h-32 mt-16 bookImg"
         alt="책 아이콘"
       />
-      <form onSubmit={SignIn} className="flex flex-col w-[80%]">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={onChange}
-          className="my-1 h-10 outline-none border-b border-[#61342F] px-2 font-gothic"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={password}
-          onChange={onChange}
-          className="my-1 h-10 outline-none border-b  border-[#61342F] px-2 font-gothic"
-        />
-        <input
-          type="submit"
-          value="Log In"
-          className="mt-2 h-8 bg-[#61342F] text-white hover:cursor-pointer"
-        />
+      <div className="w-[80%]">
+        <form onSubmit={SignIn} className="flex flex-col ">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={onChange}
+            className="my-1 h-10 outline-none border-b border-[#61342F] px-2 font-gothic"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            required
+            value={password}
+            onChange={onChange}
+            className="my-1 h-10 outline-none border-b  border-[#61342F] px-2 font-gothic"
+          />
+          <input
+            type="submit"
+            value="Log In"
+            className="mt-2 h-8 bg-[#61342F] text-white hover:cursor-pointer rounded-md"
+          />
+        </form>
         <button
           onClick={onSocialClick}
           name="google"
-          className="mt-2 rounded-md h-8 bg-[#61342F] text-white hover:cursor-pointer "
+          className="w-full mt-2 rounded-md h-8 bg-[#61342F] text-white hover:cursor-pointer "
         >
           Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-      </form>
+      </div>
       <div
         className="border-b border-[#61342F] text-[#61342F] text-sm mt-16 hover:cursor-pointer createAnAccount"
         onClick={() => setSignUpModal(true)}
