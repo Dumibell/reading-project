@@ -56,10 +56,10 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
   };
 
   return (
-    <div className="w-96 h-[500px] fixed bg-white flex flex-col items-center justify-between">
+    <div className="w-96 h-[500px] fixed bg-white flex flex-col items-center justify-between signUp">
       <FontAwesomeIcon
         icon={faXmark}
-        className="hover:cursor-pointer ml-[330px] mt-5 ml-3"
+        className="hover:cursor-pointer ml-[330px] mt-5 ml-3 closeIcon"
         onClick={() => setLoginModal(false)}
       />
       <form onSubmit={signUp} className="flex flex-col p-3 w-[90%] mb-24">
@@ -70,7 +70,7 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
           required
           value={email}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2 border-b border-[#61342F]"
+          className="my-1 h-10 outline-none px-2 border-b border-[#61342F] font-gothic"
         />
         <input
           type="text"
@@ -79,7 +79,7 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
           required
           value={name}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2 border-b border-[#61342F]"
+          className="my-1 h-10 outline-none px-2 border-b border-[#61342F] font-gothic"
         />
         <input
           type="password"
@@ -88,7 +88,7 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
           required
           value={password}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2 border-b border-[#61342F]"
+          className="my-1 h-10 outline-none px-2 border-b border-[#61342F] font-gothic"
         />
         <input
           type="password"
@@ -97,7 +97,7 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
           required
           value={passwordConfirm}
           onChange={onChange}
-          className="my-1 h-10 outline-none px-2 border-b border-[#61342F]"
+          className="my-1 h-10 outline-none px-2 border-b border-[#61342F] font-gothic"
         />
         {password !== passwordConfirm ? (
           <p className="text-[11px] text-[red] absolute top-[330px] ml-1">

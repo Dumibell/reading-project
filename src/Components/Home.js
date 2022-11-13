@@ -70,7 +70,7 @@ export const Home = ({
           className="w-[1000px] min-w-[1000px]"
         />
       </div>
-      <div className="flex justify-end mt-20 mr-20 text-sm">
+      <div className="flex justify-end mt-20 mr-20 text-sm filter">
         <div
           className="mr-2 hover:cursor-pointer hover:font-semibold"
           onClick={() => setFilter("recent")}

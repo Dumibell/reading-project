@@ -70,10 +70,10 @@ export const MyPage = ({
   };
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen myPage">
       <Navigation isLoggedIn={isLoggedIn} />
       <div className="flex mt-10">
-        <div className="w-1/5 min-w-[140px] flex flex-col items-center border-r border-[#DCCFC0]  h-screen">
+        <div className="w-1/5 min-w-[140px] flex flex-col items-center border-r border-[#DCCFC0] h-screen myPageNav">
           <div className="flex flex-col text-lg">
             <div
               onClick={() => setClickState("프로필")}
@@ -95,7 +95,7 @@ export const MyPage = ({
             </div>
           </div>
         </div>
-        <div className="ml-10 w-4/5">{showMyPage()}</div>
+        <div className="ml-10 w-4/5 showMyPage">{showMyPage()}</div>
       </div>
     </div>
   );

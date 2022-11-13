@@ -84,6 +84,73 @@ body {
     margin-right: -950px;
     padding-left: 50px;
   }
+  .cardImg {
+    min-width: 100px;
+    min-height: 100px;
+    width: 100px;
+    height: 100px;
+  }
+  body {
+    font-size: 13px;
+  }
+
+  .cardHeight {
+    height: 40px;
+  }
+
+  .bookTitle {
+    font-size: 17px;
+  }
+
+  .dateAndName {
+    font-size: 11px;
+  }
+
+  .filter {
+    margin-right: 15px;
+  }
+
+  .myPage div {
+    font-size: 13px;
+  }
+  .myPage p {
+    font-size: 13px;
+  }
+  .myPage span {
+    font-size: 13px;
+  }
+  .myPageNav {
+    min-width: 100px;
+  }
+  .showMyPage {
+    margin-left: 5px;
+  }
+
+  .loginModal {
+    width: 300px;
+    height: 400px;
+  }
+
+  .closeIcon {
+    margin-left: 260px;
+  }
+
+  .bookImg {
+    margin-top: 10px;
+  }
+
+  .createAnAccount {
+    margin-top: 20px;
+  }
+
+  .signUp {
+    width: 300px;
+    height: 400px;
+  }
+
+  .signUp .mb-24 {
+    margin-bottom: 60px;
+  }
 }
 
 /* @media (max-width: 1000px) {

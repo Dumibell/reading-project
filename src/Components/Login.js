@@ -46,17 +46,17 @@ export const Login = ({ setLoginModal }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-lg">
+    <div className="flex flex-col justify-center items-center bg-white w-96 h-[500px] p-5 rounded-md z-10 shadow-lg loginModal">
       <FontAwesomeIcon
         icon={faXmark}
-        className="ml-[340px] text-[#61342F] hover:cursor-pointer"
+        className="ml-[340px] text-[#61342F] hover:cursor-pointer closeIcon"
         onClick={() => {
           setLoginModal(false);
         }}
       />
       <img
         src={process.env.PUBLIC_URL + "/images/login-book.jpg"}
-        className="w-48 h-32 mt-16"
+        className="w-48 h-32 mt-16 bookImg"
         alt="책 아이콘"
       />
       <form onSubmit={SignIn} className="flex flex-col w-[80%]">
@@ -67,7 +67,7 @@ export const Login = ({ setLoginModal }) => {
           required
           value={email}
           onChange={onChange}
-          className="my-1 h-10 outline-none border-b border-[#61342F] px-2"
+          className="my-1 h-10 outline-none border-b border-[#61342F] px-2 font-gothic"
         />
         <input
           type="password"
@@ -76,7 +76,7 @@ export const Login = ({ setLoginModal }) => {
           required
           value={password}
           onChange={onChange}
-          className="my-1 h-10 outline-none border-b  border-[#61342F] px-2"
+          className="my-1 h-10 outline-none border-b  border-[#61342F] px-2 font-gothic"
         />
         <input
           type="submit"
@@ -92,7 +92,7 @@ export const Login = ({ setLoginModal }) => {
         </button>
       </form>
       <div
-        className="border-b border-[#61342F] text-[#61342F] text-sm mt-16 hover:cursor-pointer"
+        className="border-b border-[#61342F] text-[#61342F] text-sm mt-16 hover:cursor-pointer createAnAccount"
         onClick={() => setSignUpModal(true)}
       >
         Create an Account

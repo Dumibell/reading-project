@@ -55,7 +55,7 @@ export const Profile = ({ userObj, recentWritings }) => {
   }
 
   return (
-    <div className="mt-10 flex flex-col justify-center items-center">
+    <div className="mt-10 flex flex-col justify-center items-center profile">
       <div className="flex">
         <div className="flex items-end ">
           {editing ? (
@@ -69,7 +69,7 @@ export const Profile = ({ userObj, recentWritings }) => {
               />
               <div
                 onClick={onSubmit}
-                className="ml-3 text-xs font-bold text-[#8D6D48] hover:cursor-pointer"
+                className="ml-3 text-xs font-bold text-[#8D6D48] hover:cursor-pointer updateName"
               >
                 수정 완료
               </div>
@@ -83,7 +83,7 @@ export const Profile = ({ userObj, recentWritings }) => {
                 onClick={() => {
                   setEditing(true);
                 }}
-                className="ml-3 text-xs font-bold text-[#8D6D48] hover:cursor-pointer"
+                className="ml-3 text-xs font-bold text-[#8D6D48] hover:cursor-pointer updateName"
               >
                 이름 수정하기
               </div>
