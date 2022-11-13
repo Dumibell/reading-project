@@ -80,9 +80,18 @@ body {
 }
 
 @media (max-width: 850px) {
+  .mainImg {
+    height: 50%;
+  }
+
   .small-main {
-    margin-right: -950px;
+    margin-top: 160px;
     padding-left: 50px;
+  }
+
+  .mainBg {
+    width: 400px;
+    min-width: 400px;
   }
   .cardImg {
     min-width: 100px;

@@ -43,7 +43,7 @@ export const Home = ({
         setLoginModal={setLoginModal}
         userObj={userObj}
       />
-      <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA]">
+      <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
         <div className="mr-[-220px] mt-60 z-10 small-main min-w-[350px]">
           <div className="flex flex-col italic text-3xl">
             <p className="main-title-text">We Are Building</p>
@@ -67,7 +67,7 @@ export const Home = ({
         <img
           src={process.env.PUBLIC_URL + "/images/original.avif"}
           alt="bg"
-          className="w-[1000px] min-w-[1000px]"
+          className="w-[1000px] min-w-[1000px] mainBg"
         />
       </div>
       <div className="flex justify-end mt-20 mr-20 text-sm filter">
