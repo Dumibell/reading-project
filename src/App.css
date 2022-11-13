@@ -168,6 +168,11 @@ body {
   .signUp .mb-24 {
     margin-bottom: 60px;
   }
+
+  .searchBoxInput {
+    width: 350px;
+    font-size: 20px;
+  }
 }
 
 /* @media (max-width: 1000px) {

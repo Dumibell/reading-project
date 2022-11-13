@@ -81,7 +81,7 @@ export const Login = ({ setLoginModal }) => {
         <input
           type="submit"
           value="Log In"
-          className="mt-2 rounded-md h-8 bg-[#61342F] text-white hover:cursor-pointer"
+          className="mt-2 h-8 bg-[#61342F] text-white hover:cursor-pointer"
         />
         <button
           onClick={onSocialClick}
