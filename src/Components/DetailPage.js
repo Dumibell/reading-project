@@ -13,6 +13,8 @@ import { dbService, storageService } from "../firebase";
 import { async } from "@firebase/util";
 import { Navigation } from "./Navigation";
 import { deleteObject, ref } from "firebase/storage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export const DetailPage = ({ userObj, isLoggedIn }) => {
   const [cardDetail, setCardDetail] = useState();
@@ -66,6 +68,13 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
 
   return (
     <div className="w-full h-full flex justify-center items-center overflow-visible">
+      <FontAwesomeIcon
+        icon={faArrowLeft}
+        className="fixed top-10 left-10 hover:cursor-pointer detailArrow"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
       <div className="w-1/2 h-4/5 m-10 flex flex-col mt-14 detail">
         {cardDetail ? (
           <>
