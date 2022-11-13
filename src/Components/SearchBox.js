@@ -35,7 +35,7 @@ export const SearchBox = ({
           />
         </div>
       </div>
-      <div className="mt-20">
+      <div className="mt-20 searchResult">
         {recentWritings.map((item) => {
           return (
             <Card item={item} key={item.id} userObj={userObj} search={search} />

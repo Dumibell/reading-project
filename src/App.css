@@ -173,6 +173,10 @@ body {
     width: 350px;
     font-size: 20px;
   }
+
+  .searchResult {
+    margin-top: 40px;
+  }
 }
 
 /* @media (max-width: 1000px) {
