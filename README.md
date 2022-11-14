@@ -60,7 +60,7 @@
 
 ### 2. 메인 페이지
 #### 1) Nav바
-  - 페이지 이동시 useNavigate() 이용.
+  - useNavigate()를 이용해 페이지 이동시 경로 지정
   - 로그인을 안했을 경우엔 Login, 로그인을 했을 경우엔 myPage로 보이도록 구현
 #### 2) 피드
 ![main-feed](https://user-images.githubusercontent.com/100185602/201590976-205d8301-d5d5-4dc7-8d32-a73d62098966.gif)
