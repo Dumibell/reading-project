@@ -46,28 +46,71 @@ https://dumibell.github.io/reading-project/#/
 ### 1. 로그인/회원가입 기능
  - 모달창으로 구현
  - Firebase의 Authentication을 이용.
- - 
+
 #### 1) 로그인
+
+![signIn](https://user-images.githubusercontent.com/100185602/201590163-04e04217-8956-4dc0-8cda-5125344cdeb1.gif)
+
  - 로그인을 하지 않아도 메인 화면과 남들이 작성한 글을 볼 수 있지만, 글을 작성하거나 좋아요를 누르는 기능은 로그인을 한 사용자만 이용할 수 있도록 구현.
  - Firebase에서 제공하는 기능을 통해 구글로그인, 또는 이메일주소와 패스워드로 로그인이 가능함.
  - 입력한 메일주소/비밀번호가 없거나 일치하지 않을 경우 alert("일치하는 회원정보가 없습니다")
 
 #### 2) 회원가입
+
+![signUp](https://user-images.githubusercontent.com/100185602/201590273-446dbd25-6ff0-45ca-8bdd-12ccba7d5619.gif)
+
   - 정규식을 이용해 유효성 검사 진행
   - 회원가입시 이름도 같이 입력해 updateProfile() 메서드를 이용해 displayName이 바로 업데이트되도록 구현.
 
+<br/>
 
 ### 2. 메인 페이지
 #### 1) Nav바
+  - 페이지 이동시 useNavigate() 이용.
   - 로그인을 안했을 경우엔 Login, 로그인을 했을 경우엔 myPage로 보이도록 구현
-#### 2) 게시글
+#### 2) 피드
+![main-feed](https://user-images.githubusercontent.com/100185602/201590976-205d8301-d5d5-4dc7-8d32-a73d62098966.gif)
   - 최신순 클릭시 createdAt으로 OrderBy
   - 인기순 클릭시 like로 OrderBy
   - card 컴포넌트에 보여지는 내용을 담고 map함수를 이용해 메인화면에서 요약된 게시글을 볼 수 있도록 구현
 #### 3) 좋아요
+![like](https://user-images.githubusercontent.com/100185602/201591221-9849e747-ac54-4a3c-8105-9c7a9ac9eef5.gif)
+
+```js
+  const plusLike = (event) => {
+    updateDoc(itemRef, { like: item.like + 1 });
+    updateDoc(itemRef, { whoLikesIt: arrayUnion(userObj.uid) });
+  };
+
+  const minusLike = (event) => {
+    updateDoc(itemRef, { like: item.like - 1 });
+    updateDoc(itemRef, { whoLikesIt: arrayRemove(userObj.uid) });
+  };
+
+  const clickLikeButton = async () => {
+    if (userObj) {
+      if (item.whoLikesIt.includes(userObj.uid)) {
+        minusLike();
+      } else {
+        plusLike();
+      }
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+      setLoginModal(true);
+    }
+  };
+```
+
   - 좋아요를 누른 사용자의 uid가 배열에 담기도록 구현.
-  - 이미 좋아요 배열에 사용자의 uid가 포함되어 있는 게시글(이미 내가 해당 게시물에 좋아요를 누른 경우)은 한번 더 클릭시 좋아요가 취소되도록 구현.
-### 3. 글 작성
+  - 좋아요 배열에 사용자의 uid가 없을 경우 like 부분 +1, 좋아요 배열에 사용자 uid 추가
+  - 좋아요 배열에 사용자의 uid가 있을 경우 like 부분 -1, 좋아요 배열에서 사용자 uid 제거
+  <br/>
+
+### 3. 게시글
+
+#### 1) 글 작성
+![writing](https://user-images.githubusercontent.com/100185602/201592807-d9d5dfea-1e24-48b1-b305-4abee860ed4f.gif)
+
 ⬇️ 글 작성시 저장되는 db구조
 ```js
 await addDoc(collection(dbService, "writings"), {
@@ -84,13 +127,52 @@ await addDoc(collection(dbService, "writings"), {
         name: userObj.displayName,
       });
 ```
- - 
+
+⬇️ title과 text에 값이 담기는 함수
+```js
+  const onChange = async (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "title") {
+      setTitle(value);
+    } else if (name === "text") {
+      setText(value.replace(/\n/gi, "\\n")); //줄바꿈시 \n이 추가되어 db에 저장되도록
+    }
+  };
+```
+  - 줄바꿈이 반영되도록 input 태신 textarea 태그를 이용
+  - firestore에 db가 담길 때는 한줄의 텍스트로 저장되므로, replace함수와 정규식을 이용해 줄바꿈이 있을 때마다 text에 \n이 추가되어 저장되도록 구현.
+
+
+#### 2) 게시물 상세페이지
+
+![detailpage](https://user-images.githubusercontent.com/100185602/201594723-9e8839f2-13f7-4f33-93a9-ee455e195830.gif)
+
+- useParams를 이용해 상세페이지 연결
+- 글 작성시 줄바꿈에 의해 추가한 \n이 다시 줄바꿈되어 보이도록 구현.
+- 사용자 본인이 작성한 글일 경우 수정/삭제 버튼이 나타나도록 구현.
+
+
+
 ### 4. 검색 창
+![searchbox](https://user-images.githubusercontent.com/100185602/201595072-0374feb4-4cbd-4211-96dc-7fcf3533d197.gif)
+
+  - includes()를 이용해 검색한 내용이 포함된 게시글만 렌더링되도록 구현
+
 ### 5. 마이페이지
 #### 1) 프로필
-#### 2) 내가 작성한 글
-#### 3) 좋아요 한 글
+![profile](https://user-images.githubusercontent.com/100185602/201596029-79bd1fef-c5bd-4b53-b501-e9ece7d97d68.gif)
 
+  - 이름 수정
+  - 작성글 수에 따라 등급 분류
+  - 로그아웃 기능
+
+#### 2) 내가 작성한 글 / 좋아요 한 글
+
+![mypage](https://user-images.githubusercontent.com/100185602/201595710-b0125536-4e00-44b0-b8c8-372dad7f9280.gif)
+
+- filter()와 includes()를 사용해 사용자가 작성한 글과 좋아요 한 글을 마이페이지에서 모아 볼 수 있도록 구현.
 
 ## **Reference**
 
