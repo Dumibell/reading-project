@@ -43,7 +43,7 @@ https://dumibell.github.io/reading-project/#/
 
 
 ## **5. 구현 기능**
-### 1. 로그인/회원가입 기능
+### 1. 로그인/회원가입 
  - 모달창으로 구현
  - Firebase의 Authentication을 이용.
 
@@ -153,12 +153,14 @@ await addDoc(collection(dbService, "writings"), {
 - 글 작성시 줄바꿈에 의해 추가한 \n이 다시 줄바꿈되어 보이도록 구현.
 - 사용자 본인이 작성한 글일 경우 수정/삭제 버튼이 나타나도록 구현.
 
-
+<br/>
 
 ### 4. 검색 창
 ![searchbox](https://user-images.githubusercontent.com/100185602/201595072-0374feb4-4cbd-4211-96dc-7fcf3533d197.gif)
 
   - includes()를 이용해 검색한 내용이 포함된 게시글만 렌더링되도록 구현
+  
+  <br/>
 
 ### 5. 마이페이지
 #### 1) 프로필
@@ -176,6 +178,7 @@ await addDoc(collection(dbService, "writings"), {
 
 <br/>
 
-### 6. media query를 이용한 반응형 웹페이지 구현
+### 6. 반응형 
 ![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
 
+- media query 사용
