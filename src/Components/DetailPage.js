@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useHistory } from "react-router-dom";
 import {
   query,
   collection,
@@ -72,7 +72,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
         icon={faArrowLeft}
         className="fixed top-10 left-10 hover:cursor-pointer detailArrow"
         onClick={() => {
-          navigate("/");
+          navigate(-1);
         }}
       />
       <div className="w-1/2 h-4/5 m-10 flex flex-col mt-14 detail">
