@@ -174,4 +174,8 @@ await addDoc(collection(dbService, "writings"), {
 
 - filter()와 includes()를 사용해 사용자가 작성한 글과 좋아요 한 글을 마이페이지에서 모아 볼 수 있도록 구현.
 
+<br/>
+
+### 6. media query를 이용한 반응형 웹페이지 구현
+![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
 
