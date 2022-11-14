@@ -77,6 +77,9 @@ body {
     margin-right: -400px;
     padding-left: 50px;
   }
+  .detail {
+    width: 60%;
+  }
 }
 
 @media (max-width: 850px) {
