@@ -43,7 +43,7 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
   };
 
   const onClick = () => {
-    if (userObj.uid !== item.uid) {
+    if (userObj && userObj.uid !== item.uid) {
       updateDoc(itemRef, { visitor: item.visitor + 1 }); //다른 사용자들이 눌렀을 때만 조회수 집계
     }
     navigate(`/detailpage/${item.id}`);

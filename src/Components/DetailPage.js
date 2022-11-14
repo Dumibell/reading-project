@@ -122,8 +122,15 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
               <span>
                 {cardDetail.createdDate} by {cardDetail.name}
               </span>
-              {userObj.uid === cardDetail.uid ? (
-                <span>조회수: {cardDetail.visitor}</span>
+              {isLoggedIn ? (
+                <>
+                  {" "}
+                  {userObj.uid === cardDetail.uid ? (
+                    <span>조회수: {cardDetail.visitor}</span>
+                  ) : (
+                    <></>
+                  )}
+                </>
               ) : (
                 <></>
               )}
