@@ -38,28 +38,14 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
   }, []);
 
   return (
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <Route
-        exact
-        path="/"
-        element={
-          <Home
-            userObj={userObj}
-            isLoggedIn={Boolean(userObj)}
-            recentWritings={recentWritings}
-            likedWritings={likedWritings}
-            search={search}
-            setSearch={setSearch}
-          />
-        }
-      />
-      {userObj ? (
+    <HashRouter>
+      <Routes>
+        {" "}
         <Route
           exact
-          path="/mypage"
+          path="/"
           element={
-            <MyPage
-              u
+            <Home
               userObj={userObj}
               isLoggedIn={Boolean(userObj)}
               recentWritings={recentWritings}
@@ -69,44 +55,60 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
             />
           }
         />
-      ) : (
-        <></>
-      )}
-
-      <Route
-        exact
-        path="/writing"
-        element={
-          <Writing
-            userObj={userObj}
-            isLoggedIn={Boolean(userObj)}
-            attachment={attachment}
-            setAttachment={setAttachment}
+        {userObj ? (
+          <Route
+            exact
+            path="/mypage"
+            element={
+              <MyPage
+                u
+                userObj={userObj}
+                isLoggedIn={Boolean(userObj)}
+                recentWritings={recentWritings}
+                likedWritings={likedWritings}
+                search={search}
+                setSearch={setSearch}
+              />
+            }
           />
-        }
-      />
-      <Route
-        path="/searchbox"
-        element={
-          <SearchBox
-            userObj={userObj}
-            isLoggedIn={Boolean(userObj)}
-            recentWritings={recentWritings}
-            search={search}
-            setSearch={setSearch}
-          />
-        }
-      />
-      <Route
-        path="/detailpage/:id"
-        element={
-          <DetailPage
-            recentWritings={recentWritings}
-            userObj={userObj}
-            isLoggedIn={Boolean(userObj)}
-          />
-        }
-      />
+        ) : (
+          <></>
+        )}
+        <Route
+          exact
+          path="/writing"
+          element={
+            <Writing
+              userObj={userObj}
+              isLoggedIn={Boolean(userObj)}
+              attachment={attachment}
+              setAttachment={setAttachment}
+            />
+          }
+        />
+        <Route
+          path="/searchbox"
+          element={
+            <SearchBox
+              userObj={userObj}
+              isLoggedIn={Boolean(userObj)}
+              recentWritings={recentWritings}
+              search={search}
+              setSearch={setSearch}
+            />
+          }
+        />
+        <Route
+          path="/detailpage/:id"
+          element={
+            <DetailPage
+              recentWritings={recentWritings}
+              userObj={userObj}
+              isLoggedIn={Boolean(userObj)}
+            />
+          }
+        />
+      </Routes>
     </HashRouter>
   );
 };
