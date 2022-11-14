@@ -99,6 +99,7 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
         uid: userObj.uid,
         attachmentURL,
         name: userObj.displayName,
+        visitor: 0,
       });
       navigate("/");
     }

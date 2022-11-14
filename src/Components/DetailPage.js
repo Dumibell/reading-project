@@ -118,8 +118,15 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
                 <></>
               )}
             </div>
-            <div className="text-sm italic mt-[-5px] ">
-              {cardDetail.createdDate} by {cardDetail.name}
+            <div className="text-xs italic  flex justify-between">
+              <span>
+                {cardDetail.createdDate} by {cardDetail.name}
+              </span>
+              {userObj.uid === cardDetail.uid ? (
+                <span>조회수: {cardDetail.visitor}</span>
+              ) : (
+                <></>
+              )}
             </div>
 
             {editing ? (

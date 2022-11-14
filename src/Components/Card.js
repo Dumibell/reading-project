@@ -42,6 +42,13 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
     }
   };
 
+  const onClick = () => {
+    if (userObj.uid !== item.uid) {
+      updateDoc(itemRef, { visitor: item.visitor + 1 }); //다른 사용자들이 눌렀을 때만 조회수 집계
+    }
+    navigate(`/detailpage/${item.id}`);
+  };
+
   const showSearchList = () => {
     if (
       item.title.includes(search) ||
@@ -52,10 +59,7 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
         <div className="flex justify-center">
           <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
             <div className="w-full flex flex-col justify-between">
-              <div
-                onClick={() => navigate(`/detailpage/${item.id}`)}
-                className="hover:cursor-pointer"
-              >
+              <div onClick={onClick} className="hover:cursor-pointer">
                 <div className="text-xl font-bold mb-1 bookTitle">
                   {item.title}
                 </div>
