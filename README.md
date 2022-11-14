@@ -67,7 +67,82 @@
   - 최신순 클릭시 createdAt으로 OrderBy
   - 인기순 클릭시 like로 OrderBy
   - card 컴포넌트에 보여지는 내용을 담고 map함수를 이용해 메인화면에서 요약된 게시글을 볼 수 있도록 구현
-#### 3) 좋아요
+### 3. 게시글
+
+#### 1) 글 작성
+![writing](https://user-images.githubusercontent.com/100185602/201592807-d9d5dfea-1e24-48b1-b305-4abee860ed4f.gif)
+
+⬇️ 글 작성시 저장되는 db구조
+```js
+await addDoc(collection(dbService, "writings"), {
+        title: title,
+        text: text,
+        createdAt: Date.now(),
+        createdDate: `${date.getFullYear()}.${
+          date.getMonth() + 1
+        }.${date.getDate()}`,
+        like: 0,
+        whoLikesIt: [],
+        uid: userObj.uid,
+        attachmentURL,
+        name: userObj.displayName,
+        visitor: 0
+      });
+```
+
+⬇️ title과 text에 값이 담기는 함수
+```js
+  const onChange = async (event) => {
+    const {
+      target: { name, value },
+    } = event;
+    if (name === "title") {
+      setTitle(value);
+    } else if (name === "text") {
+      setText(value.replace(/\n/gi, "\\n")); //줄바꿈시 \n이 추가되어 db에 저장되도록
+    }
+  };
+```
+  - 줄바꿈이 반영되도록 input 태신 textarea 태그를 이용
+  - firestore에 db가 담길 때는 한줄의 텍스트로 저장되므로, replace함수와 정규식을 이용해 줄바꿈이 있을 때마다 text에 \n이 추가되어 저장되도록 구현.
+
+
+#### 2) 게시물 상세페이지
+
+![detail](https://user-images.githubusercontent.com/100185602/201617250-579985a3-9a8d-434f-bb1e-d5149a55c556.gif)
+
+- useParams를 이용해 상세페이지 연결
+- 글 작성시 줄바꿈에 의해 추가한 \n이 다시 줄바꿈되어 보이도록 구현.
+- 사용자 본인이 작성한 글일 경우 수정/삭제 버튼과 조회수가 나타나도록 구현.
+
+
+<br/>
+
+### 4. 검색 창
+![searchbox](https://user-images.githubusercontent.com/100185602/201595072-0374feb4-4cbd-4211-96dc-7fcf3533d197.gif)
+
+  - includes()를 이용해 검색한 내용이 포함된 게시글만 렌더링되도록 구현
+  
+  <br/>
+
+### 5. 마이페이지
+#### 1) 프로필
+![profile](https://user-images.githubusercontent.com/100185602/201596029-79bd1fef-c5bd-4b53-b501-e9ece7d97d68.gif)
+
+  - 이름 수정
+  - 작성글 수에 따라 등급 분류
+  - 로그아웃 기능
+
+#### 2) 내가 작성한 글 / 좋아요 한 글
+
+![mypage](https://user-images.githubusercontent.com/100185602/201595710-b0125536-4e00-44b0-b8c8-372dad7f9280.gif)
+
+- filter()와 includes()를 사용해 사용자가 작성한 글과 좋아요 한 글을 마이페이지에서 모아 볼 수 있도록 구현.
+
+<br/>
+
+### 6. 기타 기능
+#### 1) 좋아요
 ![like](https://user-images.githubusercontent.com/100185602/201591221-9849e747-ac54-4a3c-8105-9c7a9ac9eef5.gif)
 
 ```js
@@ -100,79 +175,21 @@
   - 좋아요 배열에 사용자의 uid가 있을 경우 like 부분 -1, 좋아요 배열에서 사용자 uid 제거
   <br/>
 
-### 3. 게시글
+#### 2) 조회수
 
-#### 1) 글 작성
-![writing](https://user-images.githubusercontent.com/100185602/201592807-d9d5dfea-1e24-48b1-b305-4abee860ed4f.gif)
+![조회수](https://user-images.githubusercontent.com/100185602/201621812-467e16c0-df4b-43bc-94cf-f28e77f8c2b8.gif)
 
-⬇️ 글 작성시 저장되는 db구조
-```js
-await addDoc(collection(dbService, "writings"), {
-        title: title,
-        text: text,
-        createdAt: Date.now(),
-        createdDate: `${date.getFullYear()}.${
-          date.getMonth() + 1
-        }.${date.getDate()}`,
-        like: 0,
-        whoLikesIt: [],
-        uid: userObj.uid,
-        attachmentURL,
-        name: userObj.displayName,
-      });
-```
 
-⬇️ title과 text에 값이 담기는 함수
-```js
-  const onChange = async (event) => {
-    const {
-      target: { name, value },
-    } = event;
-    if (name === "title") {
-      setTitle(value);
-    } else if (name === "text") {
-      setText(value.replace(/\n/gi, "\\n")); //줄바꿈시 \n이 추가되어 db에 저장되도록
+  ```js
+  if (userObj.uid !== item.uid) {
+      updateDoc(itemRef, { visitor: item.visitor + 1 }); //다른 사용자들이 눌렀을 때만 조회수 집계
     }
-  };
-```
-  - 줄바꿈이 반영되도록 input 태신 textarea 태그를 이용
-  - firestore에 db가 담길 때는 한줄의 텍스트로 저장되므로, replace함수와 정규식을 이용해 줄바꿈이 있을 때마다 text에 \n이 추가되어 저장되도록 구현.
-
-
-#### 2) 게시물 상세페이지
-
-![detailpage](https://user-images.githubusercontent.com/100185602/201594723-9e8839f2-13f7-4f33-93a9-ee455e195830.gif)
-
-- useParams를 이용해 상세페이지 연결
-- 글 작성시 줄바꿈에 의해 추가한 \n이 다시 줄바꿈되어 보이도록 구현.
-- 사용자 본인이 작성한 글일 경우 수정/삭제 버튼이 나타나도록 구현.
-
-<br/>
-
-### 4. 검색 창
-![searchbox](https://user-images.githubusercontent.com/100185602/201595072-0374feb4-4cbd-4211-96dc-7fcf3533d197.gif)
-
-  - includes()를 이용해 검색한 내용이 포함된 게시글만 렌더링되도록 구현
+  ```
   
-  <br/>
+  - 다른 사용자의 게시물을 누를 때마다 기존 조회수 +1
+  - 사용자 본인이 작성한 게시물일 경우 상세페이지에서 조회수를 확인할 수 있도록 구현
 
-### 5. 마이페이지
-#### 1) 프로필
-![profile](https://user-images.githubusercontent.com/100185602/201596029-79bd1fef-c5bd-4b53-b501-e9ece7d97d68.gif)
 
-  - 이름 수정
-  - 작성글 수에 따라 등급 분류
-  - 로그아웃 기능
-
-#### 2) 내가 작성한 글 / 좋아요 한 글
-
-![mypage](https://user-images.githubusercontent.com/100185602/201595710-b0125536-4e00-44b0-b8c8-372dad7f9280.gif)
-
-- filter()와 includes()를 사용해 사용자가 작성한 글과 좋아요 한 글을 마이페이지에서 모아 볼 수 있도록 구현.
-
-<br/>
-
-### 6. 반응형 
+#### 3) 반응형
 ![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
-
 - media query 사용
