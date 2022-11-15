@@ -5,6 +5,7 @@ import { authService, dbService } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 function App() {
+  const [init, setInit] = useState(false);
   const [recentWritings, setRecentWritings] = useState([]);
   const [likedWritings, setLikedWritings] = useState([]);
 
@@ -19,6 +20,7 @@ function App() {
         ...doc.data(),
       }));
       setRecentWritings(writingArr);
+      setInit(true);
     });
   }, []);
 
@@ -30,18 +32,25 @@ function App() {
         ...doc.data(),
       }));
       setLikedWritings(writingArr);
+      setInit(true);
     });
   }, []);
 
   return (
     <div className="font-referi">
-      {recentWritings ? (
+      {init ? (
         <AppRouter
           recentWritings={recentWritings}
           likedWritings={likedWritings}
         />
       ) : (
-        "Initializing..."
+        <div className="w-screen h-screen flex justify-center items-center">
+          <img
+            src={process.env.PUBLIC_URL + "/images/buffer.png"}
+            alt="버퍼링"
+            className="w-80 animate-spin"
+          />
+        </div>
       )}
     </div>
   );

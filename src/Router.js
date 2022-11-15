@@ -18,7 +18,6 @@ import { DetailPage } from "./Components/DetailPage";
 import { authService, dbService } from "./firebase";
 
 export const AppRouter = ({ recentWritings, likedWritings }) => {
-  const [init, setInit] = useState(false);
   const [userObj, setUserObj] = useState(null);
   const [search, setSearch] = useState("");
   const [attachment, setAttachment] = useState("");
@@ -33,14 +32,12 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
       } else {
         setUserObj(null);
       }
-      setInit(true);
     });
   }, []);
 
   return (
     <HashRouter>
       <Routes>
-        {" "}
         <Route
           exact
           path="/"
