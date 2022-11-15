@@ -44,8 +44,8 @@ export const Home = ({
         setLoginModal={setLoginModal}
         userObj={userObj}
       />
-      <div className="w-full h-[80%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
-        <div className="mr-[-220px] mt-60 z-10 small-main min-w-[350px]">
+      <div className="w-full h-[70%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
+        <div className="mr-[-100px] mt-60 z-10 small-main min-w-[350px]">
           <div className="flex flex-col italic text-3xl">
             <p className="main-title-text">We Are Building</p>
             <p className="main-title-text">Your Reading Habit</p>
@@ -68,10 +68,10 @@ export const Home = ({
         <img
           src={process.env.PUBLIC_URL + "/images/original.avif"}
           alt="bg"
-          className="w-[1000px] min-w-[1000px] mainBg"
+          className="w-[900px] min-w-[900px] mainBg"
         />
       </div>
-      <div className="flex justify-end mt-20 mr-20 text-sm filter">
+      <div className="flex justify-end mt-10 mr-20 text-sm filter">
         <div
           className="mr-2 hover:cursor-pointer hover:font-semibold"
           onClick={() => setFilter("recent")}
@@ -86,7 +86,7 @@ export const Home = ({
           인기순
         </div>
       </div>
-      <div className="w-full px-2 justify-center cardContainer">
+      <div className="w-full px-2 justify-center cardContainer mt-2">
         {init ? (
           <>
             {" "}
