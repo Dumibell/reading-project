@@ -23,14 +23,14 @@ export const Profile = ({ userObj, recentWritings }) => {
     setNewName(value);
   };
 
-  // const onSubmit = async () => {
-  //   await updateProfile(authService.currentUser, { displayName: newName });
-  //   window.location.reload();
-  // };
+  const onSubmit = async () => {
+    await updateProfile(authService.currentUser, { displayName: newName });
+    window.location.reload();
+  };
 
-  const onSubmit = useEffect(() => {
-    updateProfile(authService.currentUser, { displayName: newName });
-  });
+  // const onSubmit = useEffect(() => {
+  //   updateProfile(authService.currentUser, { displayName: newName });
+  // });
 
   if (userObj) {
     let arr = [];
