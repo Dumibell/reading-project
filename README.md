@@ -193,3 +193,8 @@ await addDoc(collection(dbService, "writings"), {
 #### 3) 반응형
 ![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
 - media query 사용
+
+
+#### 4) 관리자 계정
+- 관리자 계정을 따로 만들어 uid가 관리자의 uid일 때는 모든 글의 수정/삭제 버튼과 조회수가 나타나도록 구현.
+<br/>
