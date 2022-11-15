@@ -38,20 +38,11 @@ function App() {
 
   return (
     <div className="font-referi">
-      {init ? (
-        <AppRouter
-          recentWritings={recentWritings}
-          likedWritings={likedWritings}
-        />
-      ) : (
-        <div className="w-screen h-screen flex justify-center items-center">
-          <img
-            src={process.env.PUBLIC_URL + "/images/buffer.png"}
-            alt="버퍼링"
-            className="w-80 animate-spin"
-          />
-        </div>
-      )}
+      <AppRouter
+        recentWritings={recentWritings}
+        likedWritings={likedWritings}
+        init={init}
+      />
     </div>
   );
 }

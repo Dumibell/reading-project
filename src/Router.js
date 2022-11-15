@@ -17,7 +17,7 @@ import { SearchBox } from "./Components/SearchBox";
 import { DetailPage } from "./Components/DetailPage";
 import { authService, dbService } from "./firebase";
 
-export const AppRouter = ({ recentWritings, likedWritings }) => {
+export const AppRouter = ({ recentWritings, likedWritings, init }) => {
   const [userObj, setUserObj] = useState(null);
   const [search, setSearch] = useState("");
   const [attachment, setAttachment] = useState("");
@@ -49,6 +49,7 @@ export const AppRouter = ({ recentWritings, likedWritings }) => {
               likedWritings={likedWritings}
               search={search}
               setSearch={setSearch}
+              init={init}
             />
           }
         />

@@ -21,6 +21,7 @@ export const Home = ({
   userObj,
   search,
   setSearch,
+  init,
 }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [filter, setFilter] = useState("recent");
@@ -86,31 +87,44 @@ export const Home = ({
         </div>
       </div>
       <div className="w-full px-2 justify-center cardContainer">
-        {filter === "recent"
-          ? recentWritings.map((item) => {
-              return (
-                <Card
-                  item={item}
-                  key={item.id}
-                  userObj={userObj}
-                  search={search}
-                  isLoggedIn={isLoggedIn}
-                  setLoginModal={setLoginModal}
-                />
-              );
-            })
-          : likedWritings.map((item) => {
-              return (
-                <Card
-                  item={item}
-                  key={item.id}
-                  userObj={userObj}
-                  search={search}
-                  isLoggedIn={isLoggedIn}
-                  setLoginModal={setLoginModal}
-                />
-              );
-            })}
+        {init ? (
+          <>
+            {" "}
+            {filter === "recent"
+              ? recentWritings.map((item) => {
+                  return (
+                    <Card
+                      item={item}
+                      key={item.id}
+                      userObj={userObj}
+                      search={search}
+                      isLoggedIn={isLoggedIn}
+                      setLoginModal={setLoginModal}
+                    />
+                  );
+                })
+              : likedWritings.map((item) => {
+                  return (
+                    <Card
+                      item={item}
+                      key={item.id}
+                      userObj={userObj}
+                      search={search}
+                      isLoggedIn={isLoggedIn}
+                      setLoginModal={setLoginModal}
+                    />
+                  );
+                })}
+          </>
+        ) : (
+          <div className="w-full h-full flex justify-center items-center">
+            <img
+              src={process.env.PUBLIC_URL + "/images/buffer.png"}
+              alt="buffer"
+              className="w-52 animate-spin"
+            />
+          </div>
+        )}
       </div>
 
       {loginModal ? (
