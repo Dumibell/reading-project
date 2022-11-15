@@ -95,7 +95,8 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
 
               {isLoggedIn ? (
                 <>
-                  {userObj.uid === cardDetail.uid ? (
+                  {userObj.uid === cardDetail.uid ||
+                  userObj.uid === "HbGSziRbdjXRCi1FdKT8Mbn6FT62" ? (
                     <div className="mt-4 w-[100px] flex justify-end">
                       <span
                         className="border-b border-[#A09C94] text-[#A09C94] h-[16px] mx-1 hover:cursor-pointer text-xs"
@@ -125,7 +126,8 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
               {isLoggedIn ? (
                 <>
                   {" "}
-                  {userObj.uid === cardDetail.uid ? (
+                  {userObj.uid === cardDetail.uid ||
+                  userObj.uid === "HbGSziRbdjXRCi1FdKT8Mbn6FT62" ? (
                     <span>조회수: {cardDetail.visitor}</span>
                   ) : (
                     <></>
