@@ -39,12 +39,6 @@ export const Home = ({
 
   return (
     <div className="w-full h-screen">
-      <a href="https://hits.seeyoufarm.com" className="w-full flex justify-end">
-        <img
-          src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fdumibell.github.io%2Freading-project%2F&count_bg=%23FFFFFF&title_bg=%23FFFEFE&icon=&icon_color=%23FFFFFF&title=visitors&edge_flat=true"
-          alt="방문자수"
-        />
-      </a>
       <Navigation
         isLoggedIn={isLoggedIn}
         setLoginModal={setLoginModal}
