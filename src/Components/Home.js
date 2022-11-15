@@ -117,11 +117,11 @@ export const Home = ({
                 })}
           </>
         ) : (
-          <div className="w-full h-full flex justify-center items-center">
+          <div className="w-full flex justify-center items-center">
             <img
               src={process.env.PUBLIC_URL + "/images/buffer.png"}
               alt="buffer"
-              className="w-52 animate-spin"
+              className="w-52 animate-spin mt-20"
             />
           </div>
         )}

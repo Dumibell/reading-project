@@ -189,6 +189,10 @@ body {
     top: 20px;
     left: 20px;
   }
+
+  .animate-spin {
+    width: 150px;
+  }
 }
 
 /* @media (max-width: 1000px) {
