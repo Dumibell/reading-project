@@ -1,3 +1,5 @@
+<br/>
+
 ## **1. 프로젝트 소개**
 
 ### ✨매일 책 읽는 습관을 기르기 위한 개인 프로젝트입니다✨<br/>
@@ -10,7 +12,7 @@
 - 검색창에 책 제목이나 내용을 검색해 원하는 게시글만 볼 수도 있습니다.
 - 프로젝트 링크👉 https://dumibell.github.io/reading-project/#/ <br/>
 
-<br/>
+<br/><br/>
 
 ## **2. 개발 기간 및 인원**
 
@@ -20,7 +22,7 @@
   - 프론트엔드(1명): 조예지
   - 백엔드(1명): 조예지
 
-<br/>
+<br/><br/>
 
 ## **3. 적용 기술**
 
@@ -32,14 +34,17 @@
 #### Back-End
 
 <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"/>
-<br/>
+<br/><br/>
 
 ## **4. 구현 기능**
+<br/>
 
 ### 1. 로그인/회원가입
 
 - 모달창으로 구현
 - Firebase의 Authentication을 이용.
+
+<br/>
 
 #### 1) 로그인
 
@@ -49,6 +54,8 @@
 - Firebase에서 제공하는 기능을 통해 구글로그인, 또는 이메일주소와 패스워드로 로그인이 가능함.
 - 입력한 메일주소/비밀번호가 없거나 일치하지 않을 경우 alert("일치하는 회원정보가 없습니다")
 
+<br/>
+
 #### 2) 회원가입
 
 ![signUp](https://user-images.githubusercontent.com/100185602/201590273-446dbd25-6ff0-45ca-8bdd-12ccba7d5619.gif)
@@ -56,14 +63,19 @@
 - 정규식을 이용해 유효성 검사 진행
 - 회원가입시 이름도 같이 입력해 updateProfile() 메서드를 이용해 displayName이 바로 업데이트되도록 구현.
 
-<br/>
+<br/><br/>
 
 ### 2. 메인 페이지
 
 #### 1) Nav바
 
+![reading-nav](https://user-images.githubusercontent.com/100185602/201856558-a05a15a9-d555-4d24-8f35-a1c4fd0fbfe9.gif)
+
+
 - useNavigate()를 이용해 페이지 이동시 경로 지정
 - 로그인을 안했을 경우엔 Login, 로그인을 했을 경우엔 myPage로 보이도록 구현
+
+<br/>
 
 #### 2) 피드
 
@@ -72,6 +84,8 @@
 - 최신순 클릭시 createdAt으로 OrderBy
 - 인기순 클릭시 like로 OrderBy
 - card 컴포넌트에 보여지는 내용을 담고 map함수를 이용해 메인화면에서 요약된 게시글을 볼 수 있도록 구현
+
+<br/><br/>
 
 ### 3. 게시글
 
@@ -114,6 +128,8 @@ const onChange = async (event) => {
 - 줄바꿈이 반영되도록 input 태신 textarea 태그를 이용
 - firestore에 db가 담길 때는 한줄의 텍스트로 저장되므로, replace함수와 정규식을 이용해 줄바꿈이 있을 때마다 text에 \n이 추가되어 저장되도록 구현.
 
+<br/>
+
 #### 2) 게시물 상세페이지
 
 ![detail](https://user-images.githubusercontent.com/100185602/201617250-579985a3-9a8d-434f-bb1e-d5149a55c556.gif)
@@ -122,7 +138,7 @@ const onChange = async (event) => {
 - 글 작성시 줄바꿈에 의해 추가한 \n이 다시 줄바꿈되어 보이도록 구현.
 - 사용자 본인이 작성한 글일 경우 수정/삭제 버튼과 조회수가 나타나도록 구현.
 
-<br/>
+<br/><br/>
 
 ### 4. 검색 창
 
@@ -130,7 +146,7 @@ const onChange = async (event) => {
 
 - includes()를 이용해 검색한 내용이 포함된 게시글만 렌더링되도록 구현
 
-  <br/>
+  <br/><br/>
 
 ### 5. 마이페이지
 
@@ -141,6 +157,8 @@ const onChange = async (event) => {
 - 이름 수정
 - 작성글 수에 따라 등급 분류
 - 로그아웃 기능
+
+<br/>
 
 #### 2) 내가 작성한 글 / 좋아요 한 글
 
@@ -154,7 +172,7 @@ const onChange = async (event) => {
 
 - 작성한 글 / 좋아요 한 글이 아예 없을 경우 위 이미지가 랜더링되도록 구현.
 
-<br/>
+<br/><br/>
 
 ### 6. 기타 기능
 
@@ -190,6 +208,7 @@ const clickLikeButton = async () => {
 - 좋아요를 누른 사용자의 uid가 배열에 담기도록 구현.
 - 좋아요 배열에 사용자의 uid가 없을 경우 like 부분 +1, 좋아요 배열에 사용자 uid 추가
 - 좋아요 배열에 사용자의 uid가 있을 경우 like 부분 -1, 좋아요 배열에서 사용자 uid 제거
+  
   <br/>
 
 #### 2) 조회수
@@ -205,11 +224,15 @@ if (userObj.uid !== item.uid) {
 - 다른 사용자의 게시물을 누를 때마다 기존 조회수 +1
 - 사용자 본인이 작성한 게시물일 경우 상세페이지에서 조회수를 확인할 수 있도록 구현
 
+<br/>
+
 #### 3) 반응형
 
 ![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
 
 - media query 사용
+
+<br/>
 
 #### 4) 관리자 계정
 
