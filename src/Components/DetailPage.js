@@ -11,6 +11,7 @@ import {
   arrayUnion,
   addDoc,
   onSnapshot,
+  orderBy,
 } from "firebase/firestore";
 import { dbService, storageService } from "../firebase";
 import { async } from "@firebase/util";
@@ -45,7 +46,10 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
   }, []);
 
   useEffect(() => {
-    const q = query(collection(docRef, "comments"));
+    const q = query(
+      collection(docRef, "comments"),
+      orderBy("createdAt", "desc")
+    );
     onSnapshot(q, (snapshot) => {
       const comArr = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -53,7 +57,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
       }));
       setCommentArr(comArr);
     });
-  }, []); //댓글 가져오기
+  }); //댓글 가져오기
 
   const deleteCard = async () => {
     if (window.confirm("정말 이 게시글을 삭제하시겠습니까?")) {
@@ -80,7 +84,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
     } else {
       await updateDoc(docRef, { text: newText, title: newTitle });
       alert("수정이 완료되었습니다!");
-      window.location.reload();
+      setEditing(false);
     }
   };
 
@@ -97,6 +101,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
       name: userObj.displayName,
       comment: comment,
       date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
+      createdAt: Date.now(),
     });
     setComment("");
   };

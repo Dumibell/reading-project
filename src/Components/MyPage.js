@@ -41,66 +41,35 @@ export const MyPage = ({
     if (clickState === "프로필") {
       return <Profile userObj={userObj} recentWritings={recentWritings} />;
     } else if (clickState === "작성한 글") {
-      if (!writeVacant) {
-        return recentWritings.map((item) => {
-          if (item.uid === userObj.uid) {
-            return (
-              <Card
-                item={item}
-                key={item.id}
-                userObj={userObj}
-                search={search}
-                isLoggedIn={isLoggedIn}
-                setLoginModal={setLoginModal}
-              />
-            );
-          }
-          setWriteVacant(true);
-        });
-      } else {
-        return (
-          <div className="w-full h-full flex flex-col justify-center items-center pb-60">
-            <FontAwesomeIcon
-              icon={faSadTear}
-              className="text-[200px] opacity-50"
+      return recentWritings.map((item) => {
+        if (item.uid === userObj.uid) {
+          return (
+            <Card
+              item={item}
+              key={item.id}
+              userObj={userObj}
+              search={search}
+              isLoggedIn={isLoggedIn}
+              setLoginModal={setLoginModal}
             />
-            <p className="mt-4 text-2xl font-bold opacity-50">
-              작성한 게시글이 없습니다
-            </p>
-          </div>
-        );
-      }
+          );
+        }
+      });
     } else if (clickState === "좋아요 한 글") {
-      if (!likeVacant) {
-        return recentWritings.map((item) => {
-          if (item.whoLikesIt.includes(userObj.uid)) {
-            return (
-              <Card
-                item={item}
-                key={item.id}
-                userObj={userObj}
-                search={search}
-                isLoggedIn={isLoggedIn}
-                setLoginModal={setLoginModal}
-              />
-            );
-          } else {
-            setLikeVacant(true);
-          }
-        });
-      } else {
-        return (
-          <div className="w-full h-full flex flex-col justify-center items-center pb-60">
-            <FontAwesomeIcon
-              icon={faSadTear}
-              className="text-[200px] opacity-50"
+      return recentWritings.map((item) => {
+        if (item.whoLikesIt.includes(userObj.uid)) {
+          return (
+            <Card
+              item={item}
+              key={item.id}
+              userObj={userObj}
+              search={search}
+              isLoggedIn={isLoggedIn}
+              setLoginModal={setLoginModal}
             />
-            <p className="mt-4 text-2xl font-bold opacity-50">
-              좋아요를 누른 게시글이 없습니다
-            </p>
-          </div>
-        );
-      }
+          );
+        }
+      });
     }
   };
 
