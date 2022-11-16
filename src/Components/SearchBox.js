@@ -49,6 +49,7 @@ export const SearchBox = ({
                 key={item.id}
                 userObj={userObj}
                 search={search}
+                isLoggedIn={isLoggedIn}
               />
             );
           }

@@ -59,7 +59,6 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
             path="/mypage"
             element={
               <MyPage
-                u
                 userObj={userObj}
                 isLoggedIn={Boolean(userObj)}
                 recentWritings={recentWritings}
