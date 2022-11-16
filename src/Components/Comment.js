@@ -19,7 +19,8 @@ export const Comment = ({ id, uid, comment, name, date, docRef, userObj }) => {
         <span className="ml-2 text-[gray] italic text-[5px] mt-2">{date}</span>
       </div>
       <div>
-        {userObj.uid === uid ? (
+        {userObj.uid === uid ||
+        userObj.uid === "HbGSziRbdjXRCi1FdKT8Mbn6FT62" ? (
           <button onClick={deleteComment} className="ml-1">
             <FontAwesomeIcon icon={faTrash} className="text-[gray]" />
           </button>
