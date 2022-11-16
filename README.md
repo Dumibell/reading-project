@@ -168,11 +168,6 @@ const onChange = async (event) => {
 
 <br/><br/>
 
-<img width="1467" alt="스크린샷 2022-11-15 오후 4 25 09" src="https://user-images.githubusercontent.com/100185602/201855625-4d70bbb1-b59d-4682-89d4-e380dcecccb2.png">
-
-- 작성한 글 / 좋아요 한 글이 아예 없을 경우 위 이미지가 랜더링되도록 구현.
-
-<br/><br/>
 
 ### 6. 기타 기능
 
