@@ -43,6 +43,7 @@ export const Home = ({
         isLoggedIn={isLoggedIn}
         setLoginModal={setLoginModal}
         userObj={userObj}
+        setSearch={setSearch}
       />
       <div className="w-full h-[70%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
         <div className="mr-[-100px] mt-60 z-10 small-main min-w-[350px]">
@@ -86,7 +87,7 @@ export const Home = ({
           인기순
         </div>
       </div>
-      <div className="w-full px-2 justify-center cardContainer mt-2">
+      <div className="w-full px-2 justify-center cardContainer mt-2 pb-12">
         {init ? (
           <>
             {" "}

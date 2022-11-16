@@ -30,6 +30,7 @@ export const SearchBox = ({
           <input
             type="text"
             placeholder="책 제목 / 내용을 검색해주세요"
+            value={search}
             className="border-b w-[700px] text-2xl pl-7 p-2 outline-none bg-inherit searchBoxInput"
             onChange={onChange}
           />
@@ -37,9 +38,20 @@ export const SearchBox = ({
       </div>
       <div className="mt-20 searchResult">
         {recentWritings.map((item) => {
-          return (
-            <Card item={item} key={item.id} userObj={userObj} search={search} />
-          );
+          if (
+            item.title.includes(search) ||
+            item.text.includes(search) ||
+            search === ""
+          ) {
+            return (
+              <Card
+                item={item}
+                key={item.id}
+                userObj={userObj}
+                search={search}
+              />
+            );
+          }
         })}
       </div>
     </div>

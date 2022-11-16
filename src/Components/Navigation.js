@@ -4,11 +4,17 @@ import { Login } from "./Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
-export const Navigation = ({ isLoggedIn, setLoginModal, userObj }) => {
+export const Navigation = ({
+  isLoggedIn,
+  setLoginModal,
+  userObj,
+  setSearch,
+}) => {
   const navigate = useNavigate();
   const goToHome = () => {
     navigate("/");
   };
+
   const goToMyPage = () => {
     navigate("/mypage");
   };

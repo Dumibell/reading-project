@@ -50,65 +50,59 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
   };
 
   const showSearchList = () => {
-    if (
-      item.title.includes(search) ||
-      item.text.includes(search) ||
-      search === ""
-    ) {
-      return (
-        <div className="flex justify-center">
-          <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
-            <div className="w-full flex flex-col justify-between">
-              <div onClick={onClick} className="hover:cursor-pointer">
-                <div className="text-xl font-bold mb-1 bookTitle">
-                  {item.title}
-                </div>
-                <div className="mb-1 h-[70px] overflow-hidden cardHeight">
-                  {item.text.replace(/\\n/gi, " ")}
-                </div>
+    return (
+      <div className="flex justify-center">
+        <div className="w-[900px]  border-b pb-3 mt-6 m-4 flex justify-between">
+          <div className="w-full flex flex-col justify-between">
+            <div onClick={onClick} className="hover:cursor-pointer">
+              <div className="text-xl font-bold mb-1 bookTitle">
+                {item.title}
               </div>
-              <div className="flex justify-between mt-2 text-sm">
-                <div className="italic opacity-80 dateAndName">
-                  <span>{item.createdDate}</span>
-                  <span className="ml-3">by {item.name}</span>
-                </div>
-                <div className="mr-3">
-                  {isLoggedIn ? (
-                    <>
-                      {item.whoLikesIt.includes(userObj.uid) ? (
-                        <FontAwesomeIcon
-                          icon={solidHeart}
-                          onClick={clickLikeButton}
-                          className="text-[red] hover:cursor-pointer"
-                        />
-                      ) : (
-                        <FontAwesomeIcon
-                          icon={regularHeart}
-                          onClick={clickLikeButton}
-                          className="hover:cursor-pointer"
-                        />
-                      )}{" "}
-                    </>
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={regularHeart}
-                      onClick={clickLikeButton}
-                      className="hover:cursor-pointer"
-                    />
-                  )}
-                  <span className="ml-1">{item.like}</span>
-                </div>
+              <div className="mb-1 h-[70px] overflow-hidden cardHeight">
+                {item.text.replace(/\\n/gi, " ")}
               </div>
             </div>
-            <img
-              src={item.attachmentURL}
-              alt="사진"
-              className="min-w-[160px] min-h-[160px] w-[160px] h-[160px] object-cover ml-2 cardImg"
-            />
+            <div className="flex justify-between mt-2 text-sm">
+              <div className="italic opacity-80 dateAndName">
+                <span>{item.createdDate}</span>
+                <span className="ml-3">by {item.name}</span>
+              </div>
+              <div className="mr-3">
+                {isLoggedIn ? (
+                  <>
+                    {item.whoLikesIt.includes(userObj.uid) ? (
+                      <FontAwesomeIcon
+                        icon={solidHeart}
+                        onClick={clickLikeButton}
+                        className="text-[red] hover:cursor-pointer"
+                      />
+                    ) : (
+                      <FontAwesomeIcon
+                        icon={regularHeart}
+                        onClick={clickLikeButton}
+                        className="hover:cursor-pointer"
+                      />
+                    )}{" "}
+                  </>
+                ) : (
+                  <FontAwesomeIcon
+                    icon={regularHeart}
+                    onClick={clickLikeButton}
+                    className="hover:cursor-pointer"
+                  />
+                )}
+                <span className="ml-1">{item.like}</span>
+              </div>
+            </div>
           </div>
+          <img
+            src={item.attachmentURL}
+            alt="사진"
+            className="min-w-[160px] min-h-[160px] w-[160px] h-[160px] object-cover ml-2 cardImg"
+          />
         </div>
-      );
-    }
+      </div>
+    );
   };
 
   return <div>{showSearchList()}</div>;
