@@ -100,6 +100,7 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
         attachmentURL,
         name: userObj.displayName,
         visitor: 0,
+        comment: [],
       });
       navigate("/");
     }

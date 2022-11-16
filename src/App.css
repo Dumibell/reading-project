@@ -80,6 +80,10 @@ body {
   .detail {
     width: 60%;
   }
+
+  .comment {
+    width: 60%;
+  }
 }
 
 @media (max-width: 850px) {
@@ -183,6 +187,10 @@ body {
   }
 
   .detail {
+    width: 80%;
+  }
+
+  .comment {
     width: 80%;
   }
 
