@@ -205,8 +205,33 @@ const clickLikeButton = async () => {
 - 좋아요 배열에 사용자의 uid가 있을 경우 like 부분 -1, 좋아요 배열에서 사용자 uid 제거
   
   <br/>
+  
+#### 2) 댓글
 
-#### 2) 조회수
+![reading-comment](https://user-images.githubusercontent.com/100185602/202374037-4cf83db0-c3d3-4bc0-8c93-52a86efc598e.gif)
+
+<br/>
+
+⬇️ 댓글 생성시 저장되는 db 구조
+
+```js
+ await addDoc(collection(docRef, "comments"), {
+      uid: userObj.uid,
+      name: userObj.displayName,
+      comment: comment,
+      date: `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`,
+      createdAt: Date.now(),
+    });
+```
+
+
+- 각 document 안에 comments라는 collecion 생성 -> 댓글을 작성하면 collection 안에 문서 생성.
+- 작성자의 uid값을 비교해 본인이 작성한 댓글만 삭제할 수 있도록 구현.
+
+
+<br/>
+
+#### 3) 조회수
 
 ![조회수](https://user-images.githubusercontent.com/100185602/201621812-467e16c0-df4b-43bc-94cf-f28e77f8c2b8.gif)
 
@@ -221,15 +246,15 @@ if (userObj.uid !== item.uid) {
 
 <br/>
 
-#### 3) 반응형
+#### 4) 반응형
 
 ![반응형](https://user-images.githubusercontent.com/100185602/201598920-24be9883-093a-4d99-b650-7af0411d78c2.gif)
 
-- media query 사용
+- media query를 사용해 화면 비율에 따른 style값 조정.
 
 <br/>
 
-#### 4) 관리자 계정
+#### 5) 관리자 계정
 
 - 관리자 계정을 따로 만들어 uid가 관리자의 uid일 때는 모든 글과 댓글의 수정/삭제 버튼과 조회수가 나타나도록 구현.
   <br/>
