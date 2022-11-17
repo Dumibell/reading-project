@@ -20,7 +20,6 @@ export const SearchBox = ({
 
   return (
     <div>
-      <Navigation isLoggedIn={isLoggedIn} />
       <div className="w-full flex justify-center mt-10 searchBox">
         <div className="relative">
           <FontAwesomeIcon

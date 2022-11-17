@@ -21,8 +21,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Comment } from "./Comment";
+import { Login } from "./Login";
 
-export const DetailPage = ({ userObj, isLoggedIn }) => {
+export const DetailPage = ({
+  userObj,
+  isLoggedIn,
+  loginModal,
+  setLoginModal,
+}) => {
   const [cardDetail, setCardDetail] = useState();
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState();
@@ -111,9 +117,6 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
   return (
     <>
       <div className="w-full h-full flex  flex-col justify-center items-center overflow-visible ">
-        <div className="w-full">
-          <Navigation isLoggedIn={isLoggedIn} />
-        </div>
         {/* <FontAwesomeIcon
           icon={faArrowLeft}
           className="fixed top-10 left-10 hover:cursor-pointer detailArrow"
@@ -284,6 +287,13 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
             )}
           </div>
         </div>
+        {loginModal ? (
+          <div className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] z-10">
+            <Login setLoginModal={setLoginModal} userObj={userObj} />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

@@ -22,8 +22,9 @@ export const Home = ({
   search,
   setSearch,
   init,
+  setLoginModal,
+  loginModal,
 }) => {
-  const [loginModal, setLoginModal] = useState(false);
   const [filter, setFilter] = useState("recent");
 
   const navigate = useNavigate();
@@ -39,12 +40,6 @@ export const Home = ({
 
   return (
     <div className="w-full h-screen">
-      <Navigation
-        isLoggedIn={isLoggedIn}
-        setLoginModal={setLoginModal}
-        userObj={userObj}
-        setSearch={setSearch}
-      />
       <div className="w-full h-[70%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
         <div className="mr-[-100px] mt-60 z-10 small-main min-w-[350px]">
           <div className="flex flex-col italic text-3xl">
