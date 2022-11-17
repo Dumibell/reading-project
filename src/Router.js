@@ -1,5 +1,5 @@
 import { Routes, BrowserRouter, Route, HashRouter } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useParams } from "react";
 import {
   onSnapshot,
   doc,

@@ -18,6 +18,7 @@ import { async } from "@firebase/util";
 import { Navigation } from "./Navigation";
 import { deleteObject, ref } from "firebase/storage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Comment } from "./Comment";
 
@@ -28,12 +29,13 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
   const [newText, setNewText] = useState();
   const [commentArr, setCommentArr] = useState([]);
   const [comment, setComment] = useState("");
+  const [commentModal, setCommentModal] = useState(false);
 
   const navigate = useNavigate();
   const params = useParams();
-  const date = new Date();
-
   const docRef = doc(dbService, "writings", `${params.id}`);
+
+  const date = new Date();
 
   useEffect(() => {
     getDoc(docRef).then((docSnap) => {
@@ -109,7 +111,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
   return (
     <>
       <div className="w-full h-full flex  flex-col justify-center items-center overflow-visible ">
-        <div className=" w-full">
+        <div className="w-full">
           <Navigation isLoggedIn={isLoggedIn} />
         </div>
         {/* <FontAwesomeIcon
@@ -203,7 +205,7 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
                 <div className="mt-3 pb-16">
                   <img
                     src={cardDetail.attachmentURL}
-                    className="w-full  object-cover"
+                    className="w-full object-cover"
                     alt="이미지"
                   />
                   <div className="whitespace-pre-line mt-5">
@@ -216,8 +218,17 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
             ""
           )}
         </div>
-        <div className="w-1/2 comment mb-20 font-gothic text-sm">
-          <div>
+        <div className="w-1/2 comment font-gothic text-sm">
+          {/* <div className="flex font-bold">
+            <div
+              className="hover:cursor-pointer mb-5 text-[15px]"
+              onClick={() => setCommentModal(!commentModal)}
+            >
+              <FontAwesomeIcon icon={faComments} /> 댓글
+            </div>
+          </div> */}
+
+          <div className="mb-20">
             {commentArr && commentArr.length > 0 ? (
               <div className="pb-3">
                 {commentArr.map((c) => {

@@ -55,6 +55,21 @@ export const MyPage = ({
           );
         }
       });
+    } else if (clickState === "댓글 단 글") {
+      return recentWritings.map((item) => {
+        if (item.whoLikesIt.includes(userObj.uid)) {
+          return (
+            <Card
+              item={item}
+              key={item.id}
+              userObj={userObj}
+              search={search}
+              isLoggedIn={isLoggedIn}
+              setLoginModal={setLoginModal}
+            />
+          );
+        }
+      });
     } else if (clickState === "좋아요 한 글") {
       return recentWritings.map((item) => {
         if (item.whoLikesIt.includes(userObj.uid)) {
