@@ -25,7 +25,7 @@ export const Navigation = ({
 
   return (
     <div className="w-full font-referi">
-      <div className="flex justify-end items-end h-20 mr-10 mb-3">
+      <div className="flex justify-end items-end h-20 mr-10 pb-3">
         <div
           className="mr-8 hover:cursor-pointer hover:translate-y-[-2px]"
           onClick={goToHome}

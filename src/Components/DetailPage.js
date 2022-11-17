@@ -108,14 +108,18 @@ export const DetailPage = ({ userObj, isLoggedIn }) => {
 
   return (
     <>
-      <div className="w-full h-full flex  flex-col justify-center items-center overflow-visible">
-        <FontAwesomeIcon
+      <div className="w-full h-full flex  flex-col justify-center items-center overflow-visible ">
+        <div className=" w-full">
+          <Navigation isLoggedIn={isLoggedIn} />
+        </div>
+        {/* <FontAwesomeIcon
           icon={faArrowLeft}
           className="fixed top-10 left-10 hover:cursor-pointer detailArrow"
           onClick={() => {
-            navigate(-1);
+            navigate("/");
           }}
-        />
+        /> */}
+
         <div className="w-1/2 h-4/5 m-10 flex flex-col mt-14 detail">
           {cardDetail ? (
             <>
