@@ -107,7 +107,7 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-[#FBF7EE]">
+    <div className="w-full h-screen flex justify-center items-center">
       <div className="w-[60%] h-4/5 m-10 flex flex-col">
         <div className="flex flex-col h-full justify-between">
           <div className="flex flex-col flex-1">
