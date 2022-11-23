@@ -41,21 +41,24 @@ export const Home = ({
   return (
     <div className="w-full h-screen">
       <div className="w-full h-[70%] flex justify-end  relative text-container mr-10 bg-[#F0E5CA] mainImg">
-        <div className="mr-[-100px] mt-60 z-10 small-main min-w-[350px]">
-          <div className="flex flex-col italic text-3xl">
-            <p className="main-title-text">We Are Building</p>
+        <div className="mr-[-100px] mt-48 z-10 small-main min-w-[350px]">
+          <div className="flex flex-col italic text-xl">
+            <p className="text-6xl">Re:bit</p>
             <p className="main-title-text">
+              We Are Building Your Reading Habit
+            </p>
+            {/* <p className="main-title-text">
               Your
               <span>
                 <span className="z-0"> Reading Habit</span>
-                {/* <img
+                <img
                   src={process.env.PUBLIC_URL + "/images/pngwing.com.png"}
                   className="w-32 mt-[-60px] ml-20"
-                /> */}
+                />
               </span>
-            </p>
+            </p> */}
           </div>
-          <div className="mt-2 text-xs text main-text">
+          <div className="mt-1.5 text-xs text main-text">
             <p>매일 책 읽는 습관을 기르기 위한 프로젝트입니다.</p>
             <p>책 읽는 사진과 함께 느낀점을 자유롭게 작성해주세요.</p>
             <p>
