@@ -44,7 +44,16 @@ export const Home = ({
         <div className="mr-[-100px] mt-60 z-10 small-main min-w-[350px]">
           <div className="flex flex-col italic text-3xl">
             <p className="main-title-text">We Are Building</p>
-            <p className="main-title-text">Your Reading Habit</p>
+            <p className="main-title-text">
+              Your
+              <span>
+                <span className="z-0"> Reading Habit</span>
+                {/* <img
+                  src={process.env.PUBLIC_URL + "/images/pngwing.com.png"}
+                  className="w-32 mt-[-60px] ml-20"
+                /> */}
+              </span>
+            </p>
           </div>
           <div className="mt-2 text-xs text main-text">
             <p>매일 책 읽는 습관을 기르기 위한 프로젝트입니다.</p>
