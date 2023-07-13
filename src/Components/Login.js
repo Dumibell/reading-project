@@ -9,8 +9,13 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import { SignUp } from "./SignUp";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Login = ({ setLoginModal, userObj }) => {
+export const Login = ({ setLoginModal }) => {
+  //유저 정보
+  const userObj = useRecoilValue(userObjAtom);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUpModal, setSignUpModal] = useState(false);
@@ -31,7 +36,6 @@ export const Login = ({ setLoginModal, userObj }) => {
     try {
       let data;
       data = await signInWithEmailAndPassword(authService, email, password);
-
       setLoginModal(false);
     } catch (error) {
       console.log(error);

@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Login } from "./Login";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Navigation = ({
-  isLoggedIn,
-  setLoginModal,
-  userObj,
-  setSearch,
-}) => {
+export const Navigation = ({ setLoginModal, setSearch }) => {
   const navigate = useNavigate();
+
+  const userObj = useRecoilValue(userObjAtom);
+
   const goToHome = () => {
     navigate("/");
   };
@@ -32,7 +30,7 @@ export const Navigation = ({
         >
           Home
         </div>
-        {isLoggedIn ? (
+        {!!userObj ? (
           <div
             onClick={goToMyPage}
             className="hover:cursor-pointer hover:translate-y-[-2px]"

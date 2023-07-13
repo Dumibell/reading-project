@@ -1,38 +1,66 @@
-import { Routes, BrowserRouter, Route, HashRouter } from "react-router-dom";
-import { useEffect, useState, useParams } from "react";
-import {
-  onSnapshot,
-  doc,
-  collection,
-  query,
-  orderBy,
-  collectionGroup,
-  getDoc,
-} from "firebase/firestore";
+import { Routes, Route, HashRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { Home } from "./Components/Home";
-import { Login } from "./Components/Login";
 import { MyPage } from "./Components/MyPage";
 import { Writing } from "./Components/Writing";
 import { SearchBox } from "./Components/SearchBox";
 import { DetailPage } from "./Components/DetailPage";
 import { authService, dbService } from "./firebase";
 import { Navigation } from "./Components/Navigation";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { initAtom, userObjAtom } from "./atom";
 
-export const AppRouter = ({ recentWritings, likedWritings, init }) => {
-  const [userObj, setUserObj] = useState(null);
+export const AppRouter = () => {
+  //데이터 셋팅 여부
+  const setInitAtom = useSetRecoilState(initAtom);
+
+  //user 정보
+  const userObj = useRecoilValue(userObjAtom);
+  const setUserObjAtom = useSetRecoilState(userObjAtom);
+
   const [search, setSearch] = useState("");
   const [attachment, setAttachment] = useState("");
   const [loginModal, setLoginModal] = useState(false);
+  const [recentWritings, setRecentWritings] = useState([]);
+  const [likedWritings, setLikedWritings] = useState([]);
+
+  useEffect(() => {
+    const q = query(
+      collection(dbService, "writings"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const writingArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setRecentWritings(writingArr);
+      setInitAtom(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    const q = query(collection(dbService, "writings"), orderBy("like", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const writingArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setLikedWritings(writingArr);
+      setInitAtom(true);
+    });
+  }, []);
 
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
       if (user) {
-        setUserObj({
+        setUserObjAtom({
           displayName: user.displayName,
           uid: user.uid,
         });
       } else {
-        setUserObj(null);
+        setUserObjAtom(null);
       }
     });
   }, []);
@@ -40,10 +68,8 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
   return (
     <HashRouter>
       <Navigation
-        isLoggedIn={Boolean(userObj)}
         loginModal={loginModal}
         setLoginModal={setLoginModal}
-        userObj={userObj}
         setSearch={setSearch}
       />
       <Routes>
@@ -52,13 +78,10 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
           path="/"
           element={
             <Home
-              userObj={userObj}
-              isLoggedIn={Boolean(userObj)}
               recentWritings={recentWritings}
               likedWritings={likedWritings}
               search={search}
               setSearch={setSearch}
-              init={init}
               setLoginModal={setLoginModal}
               loginModal={loginModal}
             />
@@ -70,8 +93,6 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
             path="/mypage"
             element={
               <MyPage
-                userObj={userObj}
-                isLoggedIn={Boolean(userObj)}
                 recentWritings={recentWritings}
                 likedWritings={likedWritings}
                 search={search}
@@ -86,20 +107,13 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
           exact
           path="/writing"
           element={
-            <Writing
-              userObj={userObj}
-              isLoggedIn={Boolean(userObj)}
-              attachment={attachment}
-              setAttachment={setAttachment}
-            />
+            <Writing attachment={attachment} setAttachment={setAttachment} />
           }
         />
         <Route
           path="/searchbox"
           element={
             <SearchBox
-              userObj={userObj}
-              isLoggedIn={Boolean(userObj)}
               recentWritings={recentWritings}
               search={search}
               setSearch={setSearch}
@@ -111,8 +125,6 @@ export const AppRouter = ({ recentWritings, likedWritings, init }) => {
           element={
             <DetailPage
               recentWritings={recentWritings}
-              userObj={userObj}
-              isLoggedIn={Boolean(userObj)}
               loginModal={loginModal}
               setLoginModal={setLoginModal}
             />

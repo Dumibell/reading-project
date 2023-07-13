@@ -1,14 +1,10 @@
 import { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-  updateCurrentUser,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { authService } from "../firebase";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const SignUp = ({ setSignUpModal, setLoginModal }) => {
+export const SignUp = ({ setLoginModal }) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -28,12 +24,9 @@ export const SignUp = ({ setSignUpModal, setLoginModal }) => {
       setPasswordConfirm(value);
     }
   };
-  console.log(password);
-  console.log(passwordConfirm);
 
   const signUp = async (e) => {
     e.preventDefault();
-    let data;
     let passwordValid =
       /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
     if (password === passwordConfirm) {

@@ -1,30 +1,26 @@
-import { Navigation } from "./Navigation";
-import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import {
-  collection,
-  orderBy,
-  query,
-  onSnapshot,
-  doc,
-} from "firebase/firestore";
-import { dbService } from "../firebase";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Login } from "./Login";
 import { Card } from "./Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
+import { initAtom, userObjAtom } from "../atom";
 
 export const Home = ({
-  isLoggedIn,
   recentWritings,
   likedWritings,
-  userObj,
   search,
-  setSearch,
-  init,
   setLoginModal,
   loginModal,
 }) => {
+  //데이터 조회 여부
+  const init = useRecoilValue(initAtom);
+
+  // 유저 정보
+  const userObj = useRecoilValue(userObjAtom);
+
   const [filter, setFilter] = useState("recent");
 
   const navigate = useNavigate();
@@ -47,16 +43,6 @@ export const Home = ({
             <p className="main-title-text">
               We Are Building Your Reading Habit
             </p>
-            {/* <p className="main-title-text">
-              Your
-              <span>
-                <span className="z-0"> Reading Habit</span>
-                <img
-                  src={process.env.PUBLIC_URL + "/images/pngwing.com.png"}
-                  className="w-32 mt-[-60px] ml-20"
-                />
-              </span>
-            </p> */}
           </div>
           <div className="mt-1.5 text-xs text main-text">
             <p>매일 책 읽는 습관을 기르기 위한 프로젝트입니다.</p>
@@ -106,7 +92,6 @@ export const Home = ({
                       key={item.id}
                       userObj={userObj}
                       search={search}
-                      isLoggedIn={isLoggedIn}
                       setLoginModal={setLoginModal}
                     />
                   );
@@ -118,7 +103,6 @@ export const Home = ({
                       key={item.id}
                       userObj={userObj}
                       search={search}
-                      isLoggedIn={isLoggedIn}
                       setLoginModal={setLoginModal}
                     />
                   );
@@ -137,7 +121,7 @@ export const Home = ({
 
       {loginModal ? (
         <div className="fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] z-10">
-          <Login setLoginModal={setLoginModal} userObj={userObj} />
+          <Login setLoginModal={setLoginModal} />
         </div>
       ) : (
         <></>

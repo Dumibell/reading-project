@@ -1,30 +1,24 @@
-import {
-  doc,
-  updateDoc,
-  deleteDoc,
-  addDoc,
-  collection,
-  arrayUnion,
-  FieldValue,
-  arrayRemove,
-} from "firebase/firestore";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase";
-import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
+export const Card = ({ item, search, setLoginModal }) => {
   const itemRef = doc(dbService, "writings", `${item.id}`);
   const navigate = useNavigate();
 
-  const plusLike = (event) => {
+  const userObj = useRecoilValue(userObjAtom);
+
+  const plusLike = () => {
     updateDoc(itemRef, { like: item.like + 1 });
     updateDoc(itemRef, { whoLikesIt: arrayUnion(userObj.uid) });
   };
 
-  const minusLike = (event) => {
+  const minusLike = () => {
     updateDoc(itemRef, { like: item.like - 1 });
     updateDoc(itemRef, { whoLikesIt: arrayRemove(userObj.uid) });
   };
@@ -68,7 +62,7 @@ export const Card = ({ item, userObj, search, isLoggedIn, setLoginModal }) => {
                 <span className="ml-3">by {item.name}</span>
               </div>
               <div className="mr-3">
-                {isLoggedIn ? (
+                {!!userObj ? (
                   <>
                     {item.whoLikesIt.includes(userObj.uid) ? (
                       <FontAwesomeIcon

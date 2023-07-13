@@ -1,45 +1,35 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   query,
   collection,
-  where,
   doc,
   getDoc,
   deleteDoc,
   updateDoc,
-  arrayUnion,
   addDoc,
   onSnapshot,
   orderBy,
 } from "firebase/firestore";
 import { dbService, storageService } from "../firebase";
-import { async } from "@firebase/util";
-import { Navigation } from "./Navigation";
 import { deleteObject, ref } from "firebase/storage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments } from "@fortawesome/free-regular-svg-icons";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Comment } from "./Comment";
 import { Login } from "./Login";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const DetailPage = ({
-  userObj,
-  isLoggedIn,
-  loginModal,
-  setLoginModal,
-}) => {
+export const DetailPage = ({ isLoggedIn, loginModal, setLoginModal }) => {
   const [cardDetail, setCardDetail] = useState();
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState();
   const [newText, setNewText] = useState();
   const [commentArr, setCommentArr] = useState([]);
   const [comment, setComment] = useState("");
-  const [commentModal, setCommentModal] = useState(false);
 
   const navigate = useNavigate();
   const params = useParams();
   const docRef = doc(dbService, "writings", `${params.id}`);
+  const userObj = useRecoilValue(userObjAtom);
 
   const date = new Date();
 
@@ -117,14 +107,6 @@ export const DetailPage = ({
   return (
     <>
       <div className="w-full h-full flex  flex-col justify-center items-center overflow-visible ">
-        {/* <FontAwesomeIcon
-          icon={faArrowLeft}
-          className="fixed top-10 left-10 hover:cursor-pointer detailArrow"
-          onClick={() => {
-            navigate("/");
-          }}
-        /> */}
-
         <div className="w-1/2 h-4/5 m-10 flex flex-col mt-14 detail">
           {cardDetail ? (
             <>
@@ -277,11 +259,7 @@ export const DetailPage = ({
                   type="text"
                   placeholder="로그인하고 댓글을 남겨보세요!"
                   className=" flex-1 outline-none bg-inherit ml-2 mb-1"
-                />
-                <input
-                  type="submit"
-                  value="제출"
-                  className="text-sm ml-2 rounded-md bg-[gray] text-white px-1.5 mb-1"
+                  onClick={() => setLoginModal(true)}
                 />
               </div>
             )}

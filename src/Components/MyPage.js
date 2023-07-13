@@ -1,41 +1,18 @@
-import { Navigation } from "./Navigation";
-
-import { useState, useEffect } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { dbService } from "../firebase";
+import { useState } from "react";
 import { Card } from "./Card";
-import { isReactNative } from "@firebase/util";
 import { Profile } from "./Profile";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSadTear } from "@fortawesome/free-regular-svg-icons";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
 export const MyPage = ({
   isLoggedIn,
-  userObj,
   search,
   setLoginModal,
   recentWritings,
 }) => {
-  const [myWritings, setMyWritings] = useState([]);
+  const userObj = useRecoilValue(userObjAtom);
+
   const [clickState, setClickState] = useState("프로필");
-  const [writeVacant, setWriteVacant] = useState(false);
-  const [likeVacant, setLikeVacant] = useState(false);
-
-  // useEffect(() => {
-  //   const q = query(
-  //     collection(dbService, `writings/users/${userObj.uid}`),
-  //     orderBy("createdAt", "desc")
-  //   );
-  //   onSnapshot(q, (snapshot) => {
-  //     const writingArr = snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //     }));
-  //     setMyWritings(writingArr);
-  //   });
-  // }, []);
-
-  // console.log(myWritings);
 
   const showMyPage = () => {
     if (clickState === "프로필") {
@@ -47,9 +24,7 @@ export const MyPage = ({
             <Card
               item={item}
               key={item.id}
-              userObj={userObj}
               search={search}
-              isLoggedIn={isLoggedIn}
               setLoginModal={setLoginModal}
             />
           );
@@ -62,9 +37,7 @@ export const MyPage = ({
             <Card
               item={item}
               key={item.id}
-              userObj={userObj}
               search={search}
-              isLoggedIn={isLoggedIn}
               setLoginModal={setLoginModal}
             />
           );
@@ -77,9 +50,7 @@ export const MyPage = ({
             <Card
               item={item}
               key={item.id}
-              userObj={userObj}
               search={search}
-              isLoggedIn={isLoggedIn}
               setLoginModal={setLoginModal}
             />
           );
