@@ -55,7 +55,7 @@ export const DetailPage = ({ isLoggedIn, loginModal, setLoginModal }) => {
       }));
       setCommentArr(comArr);
     });
-  }, []); //댓글 가져오기
+  }, [commentArr]); //댓글 가져오기
 
   const deleteCard = async () => {
     if (window.confirm("정말 이 게시글을 삭제하시겠습니까?")) {
