@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth, updateProfile } from "firebase/auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { authService } from "../firebase";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Profile = ({ userObj, recentWritings }) => {
+export const Profile = ({ recentWritings }) => {
+  const userObj = useRecoilValue(userObjAtom);
+
   const [editing, setEditing] = useState(false);
   const [newName, setNewName] = useState(userObj.displayName);
   let levelEmoji;
@@ -25,12 +29,8 @@ export const Profile = ({ userObj, recentWritings }) => {
 
   const onSubmit = async () => {
     await updateProfile(authService.currentUser, { displayName: newName });
-    window.location.reload();
+    setEditing(false);
   };
-
-  // const onSubmit = useEffect(() => {
-  //   updateProfile(authService.currentUser, { displayName: newName });
-  // });
 
   if (userObj) {
     let arr = [];
@@ -80,9 +80,7 @@ export const Profile = ({ userObj, recentWritings }) => {
             </>
           ) : (
             <>
-              <div className="text-2xl font-bold">
-                {userObj.displayName}님의 프로필
-              </div>
+              <div className="text-2xl font-bold">{newName}님의 프로필</div>
               <div
                 onClick={() => {
                   setEditing(true);
