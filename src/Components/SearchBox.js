@@ -1,16 +1,17 @@
-import { Navigation } from "./Navigation";
 import { Card } from "./Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
 export const SearchBox = ({
   recentWritings,
-  userObj,
   search,
   setSearch,
   isLoggedIn,
 }) => {
+  const userObj = useRecoilValue(userObjAtom);
+
   const onChange = (e) => {
     const {
       target: { value },

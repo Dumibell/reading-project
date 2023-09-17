@@ -4,12 +4,7 @@ import { Profile } from "./Profile";
 import { useRecoilValue } from "recoil";
 import { userObjAtom } from "../atom";
 
-export const MyPage = ({
-  isLoggedIn,
-  search,
-  setLoginModal,
-  recentWritings,
-}) => {
+export const MyPage = ({ search, setLoginModal, recentWritings }) => {
   const userObj = useRecoilValue(userObjAtom);
 
   const [clickState, setClickState] = useState("프로필");

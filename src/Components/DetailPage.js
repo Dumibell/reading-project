@@ -204,15 +204,6 @@ export const DetailPage = ({ isLoggedIn, loginModal, setLoginModal }) => {
           )}
         </div>
         <div className="w-1/2 comment font-gothic text-sm">
-          {/* <div className="flex font-bold">
-            <div
-              className="hover:cursor-pointer mb-5 text-[15px]"
-              onClick={() => setCommentModal(!commentModal)}
-            >
-              <FontAwesomeIcon icon={faComments} /> 댓글
-            </div>
-          </div> */}
-
           <div className="mb-20">
             {commentArr && commentArr.length > 0 ? (
               <div className="pb-3">

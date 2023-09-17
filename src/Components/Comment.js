@@ -1,8 +1,11 @@
 import { deleteDoc, doc } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Comment = ({ id, uid, comment, name, date, docRef, userObj }) => {
+export const Comment = ({ id, uid, comment, name, date, docRef }) => {
+  const userObj = useRecoilValue(userObjAtom);
   const commentRef = doc(docRef, "comments", `${id}`);
 
   const deleteComment = async () => {

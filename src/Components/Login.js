@@ -9,12 +9,12 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 import { SignUp } from "./SignUp";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userObjAtom } from "../atom";
 
 export const Login = ({ setLoginModal }) => {
   //유저 정보
-  const userObj = useRecoilValue(userObjAtom);
+  const [userObj, setUserObj] = useRecoilState(userObjAtom);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +34,12 @@ export const Login = ({ setLoginModal }) => {
   const SignIn = async (e) => {
     e.preventDefault();
     try {
-      let data;
-      data = await signInWithEmailAndPassword(authService, email, password);
+      const data = await signInWithEmailAndPassword(
+        authService,
+        email,
+        password
+      );
+      setUserObj({ displayName: data.user.displayName, uid: data.user.uid });
       setLoginModal(false);
     } catch (error) {
       console.log(error);
@@ -46,9 +50,9 @@ export const Login = ({ setLoginModal }) => {
   const onSocialClick = async () => {
     let provider = new GoogleAuthProvider();
     const data = await signInWithPopup(authService, provider);
+    setUserObj({ displayName: data.user.displayName, uid: data.user.uid });
     setLoginModal(false);
     alert(`환영합니다 ${userObj.displayName}님!`);
-    console.log(data);
   };
 
   return (

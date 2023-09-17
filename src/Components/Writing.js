@@ -1,13 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { addDoc, collection, setDoc, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { dbService, storageService } from "../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoFilm } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
+import { useRecoilValue } from "recoil";
+import { userObjAtom } from "../atom";
 
-export const Writing = ({ userObj, attachment, setAttachment }) => {
+export const Writing = ({ attachment, setAttachment }) => {
+  /** 로그인정보 */
+  const userObj = useRecoilValue(userObjAtom);
+
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -20,8 +25,6 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
       navigate("/");
     }
   };
-
-  const userRef = doc(dbService, "writings", "users");
 
   const onChange = async (event) => {
     const {
@@ -72,20 +75,6 @@ export const Writing = ({ userObj, attachment, setAttachment }) => {
         attachmentURL = await getDownloadURL(response.ref);
       }
 
-      // await addDoc(collection(userRef, `${userObj.uid}`), {
-      //   title: title,
-      //   text: text,
-      //   createdAt: Date.now(),
-      //   createdDate: `${date.getFullYear()}.${
-      //     date.getMonth() + 1
-      //   }.${date.getDate()}`,
-      //   like: 0,
-      //   whoLikesIt: [],
-      //   month: `${date.getFullYear()}.${date.getMonth() + 1}`,
-      //   uid: userObj.uid,
-      //   attachmentURL,
-      //   name: userObj.displayName,
-      // });
       await addDoc(collection(dbService, "writings"), {
         title: title,
         text: text,
